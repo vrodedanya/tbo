@@ -9,21 +9,21 @@
 #---------------------------------------#
 
 # Program name (ex: test, program)
-NAME := 
+NAME := window
 # Compiler name (ex: gcc, g++, clang)
-CC := 
+CC := g++
 # File extension (ex: .cpp, .c)
-LANG := 
+LANG := .cpp
 # Compiler flags (ex: -Wall, -O2, -g)
-CFLAGS := 
+CFLAGS := -Wall -O0 -g
 # Linker flags (ex: -g )
-LDFLAGS := 
+LDFLAGS := -g
 # Libs (ex: -lm, -lncurses, -lSDL2)
-LIBS := 
+LIBS := -lSDL2
 # Defines (ex: -D DEBUG, -Dcount=5)
-DEF := 
+DEF := -D DEBUG
 # Directories with source code (ex: source)
-DIR := 
+DIR := source
 
 #---------------------------------------#
 
