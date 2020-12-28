@@ -2,28 +2,45 @@
 #define WINDOW_HPP
 
 #include <SDL2/SDL.h>
+#ifdef DEBUG
+	#include <iostream>
+#endif
 
-class Window
+namespace SDL2S
 {
-private:
-	SDL_Window* window;
-	SDL_Renderer* renderer;
-public:
-	explicit Window(const char* title, int width = 100, int height = 100, int xpos = SDL_WINDOWPOS_CENTERED, int ypos = SDL_WINDOWPOS_CENTERED, Uint32 window_flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, Uint32 renderer_flags = SDL_RENDERER_ACCELERATED)
+	class window
 	{
-		if (SDL_WasInit(SDL_INIT_VIDEO) == 0) SDL_Init(SDL_INIT_VIDEO);
-		window = SDL_CreateWindow(title, xpos, ypos, width, height, window_flags);
-		renderer = SDL_CreateRenderer(window, -1, renderer_flags);
-	}	
-	~Window()
-	{
-		SDL_DestroyRenderer(renderer);
-		SDL_DestroyWindow(window);
-	}
-	SDL_Window* get_window(){return window;}
-	SDL_Renderer* get_renderer(){return renderer;}
+	private:
+		SDL_Window* wind;
+		SDL_Renderer* renderer;
+	public:
+		explicit window(const char* title, int width = 100, int height = 100, int xpos = SDL_WINDOWPOS_CENTERED, int ypos = SDL_WINDOWPOS_CENTERED, Uint32 window_flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, Uint32 renderer_flags = SDL_RENDERER_ACCELERATED)
+		{
+			if (SDL_WasInit(SDL_INIT_VIDEO) == 0) SDL_Init(SDL_INIT_VIDEO);
+			wind = SDL_CreateWindow(title, xpos, ypos, width, height, window_flags);
+			renderer = SDL_CreateRenderer(wind, -1, renderer_flags);
+		}	
+		window(const window& wind) = delete;
+		window(window&& w)
+		{
+			this->wind = w.wind;
+			this->renderer = w.renderer;
+			w.wind = nullptr;
+			w.renderer = nullptr;
+#ifdef DEBUG
+			std::cerr << "Called move constructor" << std::endl;
+#endif
+		}
+		~window()
+		{
+			if (renderer != nullptr) SDL_DestroyRenderer(renderer);
+			if (wind != nullptr) SDL_DestroyWindow(wind);
+		}
+		SDL_Window* get_window(){return wind;}
+		SDL_Renderer* get_renderer(){return renderer;}
 
-	void update();
-};
+		void update();
+	};
+}
 
 #endif
