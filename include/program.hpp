@@ -24,6 +24,8 @@ namespace SDL2S
 			}
 		}
 		void add_window(const std::string& name, const char* title, int width = 100, int height = 100, int xpos = SDL_WINDOWPOS_CENTERED, int ypos = SDL_WINDOWPOS_CENTERED, Uint32 window_flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, Uint32 renderer_flags = SDL_RENDERER_ACCELERATED);
+
+		SDL2S::window* get_window(const char* window_name);
 		
 		void loop();
 

@@ -6,6 +6,8 @@ int main()
 
 	prog.add_window("main", "title", 500, 500);
 
+	prog.get_window("sub")->update();
+
 	prog.loop();
 
 	return 0;
