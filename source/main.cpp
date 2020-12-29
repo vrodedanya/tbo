@@ -1,20 +1,12 @@
-#include "../include/window.hpp"
-#include <utility>
+#include "../include/program.hpp"
 
 int main()
 {
-	SDL2S::window wind("title", 400, 400);
+	SDL2S::program prog;
 
-	SDL2S::window test{std::move(wind)};
+	prog.add_window("main", "title", 500, 500);
 
-	SDL_Event event;
-	bool isWork = true;
-	while (isWork) 
-	{
-		wind.update();
-		//test.update();
-		while (SDL_PollEvent(&event))
-			if (event.type == SDL_KEYDOWN) isWork = false;
-	}
+	prog.loop();
+
 	return 0;
 }
