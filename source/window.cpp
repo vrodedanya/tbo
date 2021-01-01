@@ -23,3 +23,10 @@ void SDL2S::window::add_object(SDL2S::renderable* obj)
 	}
 	objects.emplace_back(obj);
 }
+
+void SDL2S::window::remove_object(SDL2S::renderable * obj)
+{
+	auto it = std::find(objects.begin(), objects.end(), obj);
+	if (it == objects.end()) throw std::runtime_error("Object doesn't exist");
+	objects.erase(it);
+}

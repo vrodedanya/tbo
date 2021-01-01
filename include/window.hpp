@@ -47,6 +47,8 @@ namespace SDL2S
 		std::vector<SDL2S::renderable*>& get_objects(){return objects;}
 
 		void add_object(SDL2S::renderable* obj);
+
+		void remove_object(SDL2S::renderable * obj);
 	};
 }
 
