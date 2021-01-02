@@ -40,13 +40,17 @@ namespace SDL2S
 			w.wind = nullptr;
 			w.renderer = nullptr;
 #ifdef DEBUG
-			std::cerr << "Called move constructor" << std::endl;
+			std::cerr << "Called window move constructor" << std::endl;
 #endif
 		}
 		~window()
 		{
 			if (renderer != nullptr) SDL_DestroyRenderer(renderer);
 			if (wind != nullptr) SDL_DestroyWindow(wind);
+			if (wind == NULL) std::cerr << "It's okey..." << std::endl;
+#ifdef DEBUG
+			std::cerr << "Calles window destructor" << std::endl;
+#endif
 		}
 		SDL_Window* get_window(){return wind;}
 		SDL_Renderer* get_renderer(){return renderer;}
