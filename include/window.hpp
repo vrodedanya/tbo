@@ -29,7 +29,7 @@ namespace SDL2S
 			}
 			if ((renderer = SDL_CreateRenderer(wind, -1, renderer_flags)) == NULL)
 			{
-				throw std::runtime_erorr("Creating renderer error");
+				throw std::runtime_error("Creating renderer error");
 			}
 		}	
 		window(const window& wind) = delete;
