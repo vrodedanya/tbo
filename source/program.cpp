@@ -11,16 +11,12 @@ void SDL2S::program::add_window(const std::string& name, const char* title, int 
 
 void SDL2S::program::loop()
 {
-	SDL_Event event;
-	while (1)
+	while (!windows.empty())
 	{
+		emanager->update();
 		for (auto& window : windows)
 		{
 			window->update();
-		}
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT) std::abort();
 		}
 	}
 }
