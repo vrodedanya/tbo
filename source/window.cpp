@@ -1,6 +1,7 @@
 #include "../include/window.hpp"
 #include <algorithm>
 #include <stdexcept>
+#include "../include/signal_manager.hpp"
 
 void SDL2S::window::update()
 {
