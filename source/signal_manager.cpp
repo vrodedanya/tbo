@@ -19,3 +19,10 @@ void SDL2S::signal_manager::add_signal(const SDL2S::signal& sig)
 {
 	signals.push_back(sig);
 }
+
+bool SDL2S::operator !=(const SDL2S::signal& sig1, const SDL2S::signal& sig2)
+{
+	if (sig1.command != sig2.command || sig1.id != sig2.id || sig1.recipient != sig2.recipient) return true;
+	else return false;
+}
+

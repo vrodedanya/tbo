@@ -15,12 +15,32 @@ void SDL2S::program::loop()
 	while (!windows.empty())
 	{
 		emanager->update();
-		SDL2S::signal sig = SDL2S::signal_manager::get_signal("program");
-		if (sig.recipient != "")
+		SDL2S::signal sig;
+		while((sig = SDL2S::signal_manager::get_signal("program")) != SDL2S::signal("","",""))
 		{
-			std::cerr << "Recipient: " << sig.recipient << std::endl;
-			std::cerr << "ID       : " << sig.id << std::endl;
-			std::cerr << "Command  : " << sig.command << std::endl;
+			if (sig.recipient != "")
+			{
+#ifdef DEBUG
+				std::cerr << "Program receiving signal..." << std::endl;
+				std::cerr << "Recipient: " << sig.recipient << std::endl;
+				std::cerr << "ID       : " << sig.id << std::endl;
+				std::cerr << "Command  : " << sig.command << std::endl;
+#endif
+				if (sig.command == "destroy window")
+				{
+					Uint32 id = std::stoi(sig.id);
+					auto it = std::find_if (windows.begin(), windows.end(), [id](SDL2S::window* w){return SDL_GetWindowID(w->get_window()) == id;});
+
+					if (it != windows.end())
+					{
+						delete *it;
+						windows.erase(it);
+#ifdef DEBUG
+						std::cerr << "Window with id: " << id << " was destroy" << std::endl;
+#endif
+					}
+				}
+			}
 		}
 		for (auto& window : windows)
 		{

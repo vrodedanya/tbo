@@ -1,4 +1,5 @@
 #include "../include/event_manager.hpp"
+#include "../include/signal_manager.hpp"
 
 void SDL2S::event_manager::update()
 {
@@ -10,8 +11,7 @@ void SDL2S::event_manager::update()
 				switch(event.window.event)
 				{
 					case SDL_WINDOWEVENT_CLOSE:
-						SDL_Window* wind = SDL_GetWindowFromID(event.window.windowID);
-						SDL_DestroyWindow(wind);
+						SDL2S::signal_manager::add_signal(SDL2S::signal("program", std::to_string(event.window.windowID), "destroy window"));
 						break;
 				}
 				break;

@@ -14,13 +14,21 @@ namespace SDL2S
 	{
 	private:
 	public:
+		signal()
+		{
+		}
 		signal(const std::string& _recipient, const std::string& _id, const std::string& _command) : recipient(_recipient), id(_id), command(_command)
 		{
 		}
 		std::string recipient;
 		std::string id;
 		std::string command;
+
+
+		friend bool operator !=(const SDL2S::signal&, const SDL2S::signal&);
 	};
+	bool operator !=(const SDL2S::signal& sig1, const SDL2S::signal& sig2);
+		
 
 	class signal_manager
 	{
