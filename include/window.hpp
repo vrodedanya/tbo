@@ -4,9 +4,7 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include "../include/renderable.hpp"
-#ifdef DEBUG
-	#include <iostream>
-#endif
+#include "logger.hpp"
 
 namespace tbo
 {
@@ -22,15 +20,18 @@ namespace tbo
 			if (SDL_WasInit(SDL_INIT_VIDEO) == 0) 
 			{
 				if (SDL_Init(SDL_INIT_VIDEO) != 0) throw std::runtime_error("Video initializing error");
+				tbo::logger::log("window", "SDL2 was initialized");
 			}
 			if ((wind = SDL_CreateWindow(title, xpos, ypos, width, height, window_flags)) == NULL)
 			{
 				throw std::runtime_error("Creating window error");
 			}
+			tbo::logger::log("window", "new window was created with id", SDL_GetWindowID(wind));
 			if ((renderer = SDL_CreateRenderer(wind, -1, renderer_flags)) == NULL)
 			{
 				throw std::runtime_error("Creating renderer error");
 			}
+			tbo::logger::log("window", "window's renderer was created");
 		}	
 		window(const window& wind) = delete;
 		window(window&& w)
@@ -39,18 +40,13 @@ namespace tbo
 			this->renderer = w.renderer;
 			w.wind = nullptr;
 			w.renderer = nullptr;
-#ifdef DEBUG
-			std::cerr << "Called window move constructor" << std::endl;
-#endif
+			tbo::logger::log("window", "called move constructor");
 		}
 		~window()
 		{
 			if (renderer != nullptr) SDL_DestroyRenderer(renderer);
 			if (wind != nullptr) SDL_DestroyWindow(wind);
-			if (wind == NULL) std::cerr << "It's okey..." << std::endl;
-#ifdef DEBUG
-			std::cerr << "Called window destructor" << std::endl;
-#endif
+			tbo::logger::log("window", "called destructor");
 		}
 		SDL_Window* get_window(){return wind;}
 		SDL_Renderer* get_renderer(){return renderer;}

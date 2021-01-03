@@ -2,16 +2,14 @@
 #include <algorithm>
 #include <stdexcept>
 #include "../include/signal_manager.hpp"
+#include "../include/logger.hpp"
 
 void tbo::program::signal_handler()
 {
 	tbo::signal sig;
 	while((sig = tbo::signal_manager::get_signal("program")) != tbo::signal("","",""))
 	{
-#ifdef DEBUG
-		std::cerr << "Program receiving signal..." << std::endl;
-		std::cerr << sig << std::endl; 
-#endif
+		tbo::logger::log("program", "receiving signal (", sig, ")");		
 		if (sig.command == "destroy window")
 		{
 			Uint32 id = std::stoi(sig.id);
@@ -21,9 +19,15 @@ void tbo::program::signal_handler()
 			{
 				delete *it;
 				windows.erase(it);
-#ifdef DEBUG
-				std::cerr << "Window with id " << id << " was destroyed" << std::endl;
-#endif
+				for (auto map_it = windows_map.begin() ; map_it != windows_map.end() ; map_it++)
+				{
+					if (map_it->second == *it) 
+					{
+						windows_map.erase(map_it);
+						break;
+					}
+				}
+				tbo::logger::log("program", "window with id", id, "was destroyed");
 			}
 		}
 		else
@@ -51,6 +55,7 @@ void tbo::program::add_window(const std::string& name, const char* title, int wi
 	tbo::window* win = new tbo::window(title, width, height, xpos, ypos, window_flags, renderer_flags);
 	windows_map[name] = win;
 	windows.emplace_back(win);
+	tbo::logger::log("program", "added new window with name", name);
 }
 
 tbo::window* tbo::program::get_window(const char* window_name)
