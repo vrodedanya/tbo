@@ -10,9 +10,7 @@ void tbo::program::signal_handler()
 	{
 #ifdef DEBUG
 		std::cerr << "Program receiving signal..." << std::endl;
-		std::cerr << "Recipient: " << sig.recipient << std::endl;
-		std::cerr << "ID       : " << sig.id << std::endl;
-		std::cerr << "Command  : " << sig.command << std::endl;
+		std::cerr << sig << std::endl; 
 #endif
 		if (sig.command == "destroy window")
 		{
