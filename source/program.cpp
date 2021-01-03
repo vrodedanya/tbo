@@ -2,16 +2,14 @@
 #include <algorithm>
 #include <stdexcept>
 #include "../include/signal_manager.hpp"
+#include "../include/logger.hpp"
 
 void tbo::program::signal_handler()
 {
 	tbo::signal sig;
 	while((sig = tbo::signal_manager::get_signal("program")) != tbo::signal("","",""))
 	{
-#ifdef DEBUG
-		std::cerr << "Program receiving signal..." << std::endl;
-		std::cerr << sig << std::endl; 
-#endif
+		tbo::logger::log("program", "receiving signal (", sig);		
 		if (sig.command == "destroy window")
 		{
 			Uint32 id = std::stoi(sig.id);
