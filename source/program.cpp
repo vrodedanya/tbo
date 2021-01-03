@@ -3,14 +3,6 @@
 #include <stdexcept>
 #include "../include/signal_manager.hpp"
 
-void tbo::program::add_window(const std::string& name, const char* title, int width, int height, int xpos, int ypos, Uint32 window_flags, Uint32 renderer_flags)
-{
-	tbo::window* win = new tbo::window(title, width, height, xpos, ypos, window_flags, renderer_flags);
-	windows_map[name] = win;
-	windows.emplace_back(win);
-}
-
-
 void tbo::program::signal_handler()
 {
 	tbo::signal sig;
@@ -54,6 +46,13 @@ void tbo::program::loop()
 			window->update();
 		}
 	}
+}
+
+void tbo::program::add_window(const std::string& name, const char* title, int width, int height, int xpos, int ypos, Uint32 window_flags, Uint32 renderer_flags)
+{
+	tbo::window* win = new tbo::window(title, width, height, xpos, ypos, window_flags, renderer_flags);
+	windows_map[name] = win;
+	windows.emplace_back(win);
 }
 
 tbo::window* tbo::program::get_window(const char* window_name)
