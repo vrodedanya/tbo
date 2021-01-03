@@ -49,7 +49,7 @@ namespace tbo
 			if (wind != nullptr) SDL_DestroyWindow(wind);
 			if (wind == NULL) std::cerr << "It's okey..." << std::endl;
 #ifdef DEBUG
-			std::cerr << "Calles window destructor" << std::endl;
+			std::cerr << "Called window destructor" << std::endl;
 #endif
 		}
 		SDL_Window* get_window(){return wind;}

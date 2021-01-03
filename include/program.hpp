@@ -12,8 +12,8 @@ namespace tbo
 	class program
 	{
 	private:
-		std::map<std::string, window*> windows_map;
-		std::vector<window*> windows;
+		std::map<std::string, tbo::window*> windows_map;
+		std::vector<tbo::window*> windows;
 		tbo::event_manager* emanager;
 	public:
 		explicit program() : emanager(new tbo::event_manager()){}
@@ -33,6 +33,8 @@ namespace tbo
 		tbo::event_manager* get_eventManager(){return emanager;}
 
 		void loop();
+
+		void signal_handler();
 
 	};
 }

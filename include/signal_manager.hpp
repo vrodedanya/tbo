@@ -24,10 +24,13 @@ namespace tbo
 		std::string id;
 		std::string command;
 
-
 		friend bool operator !=(const tbo::signal&, const tbo::signal&);
+		friend bool operator ==(const tbo::signal&, const tbo::signal&);
+		friend std::ostream& operator <<(std::ostream& os, const tbo::signal& sig);
 	};
+	bool operator ==(const tbo::signal& sig1, const tbo::signal& sig2);
 	bool operator !=(const tbo::signal& sig1, const tbo::signal& sig2);
+	std::ostream& operator <<(std::ostream& os, const tbo::signal& sig);
 		
 
 	class signal_manager
@@ -35,6 +38,10 @@ namespace tbo
 	private:
 		static std::vector<tbo::signal> signals;
 	public:
+		signal_manager() = delete;
+		signal_manager(const signal_manager&) = delete;
+		signal_manager(signal_manager&&) = delete;
+
 		static tbo::signal get_signal(const std::string& recipient);
 		static void add_signal(const tbo::signal& sig);
 	};
