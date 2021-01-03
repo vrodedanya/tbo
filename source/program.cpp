@@ -36,7 +36,7 @@ void SDL2S::program::loop()
 						delete *it;
 						windows.erase(it);
 #ifdef DEBUG
-						std::cerr << "Window with id: " << id << " was destroy" << std::endl;
+						std::cerr << "Window with id " << id << " was destroyed" << std::endl;
 #endif
 					}
 				}
