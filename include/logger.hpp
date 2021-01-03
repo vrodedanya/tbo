@@ -21,6 +21,8 @@ namespace tbo
 			rec_log(MArgs...);
 		}
 	public:
+		logger() = delete;
+
 		static bool TurnedOn;
 
 		template<typename... AArgs>
