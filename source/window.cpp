@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include "../include/signal_manager.hpp"
 
-void SDL2S::window::update()
+void tbo::window::update()
 {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
@@ -16,7 +16,7 @@ void SDL2S::window::update()
 	SDL_RenderPresent(renderer);
 }
 
-void SDL2S::window::add_object(SDL2S::renderable* obj)
+void tbo::window::add_object(tbo::renderable* obj)
 {
 	if (std::find(objects.begin(), objects.end(), obj) != objects.end())
 	{
@@ -25,7 +25,7 @@ void SDL2S::window::add_object(SDL2S::renderable* obj)
 	objects.emplace_back(obj);
 }
 
-void SDL2S::window::remove_object(SDL2S::renderable * obj)
+void tbo::window::remove_object(tbo::renderable * obj)
 {
 	auto it = std::find(objects.begin(), objects.end(), obj);
 	if (it == objects.end()) throw std::runtime_error("Object doesn't exist");

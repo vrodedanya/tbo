@@ -4,9 +4,9 @@
 #include "renderable.hpp"
 #include <SDL2/SDL.h>
 
-namespace SDL2S
+namespace tbo
 {
-	class panel : public SDL2S::renderable
+	class panel : public tbo::renderable
 	{
 	private:
 		SDL_Rect body;

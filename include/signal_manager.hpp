@@ -8,7 +8,7 @@
 	#include <iostream>
 #endif
 
-namespace SDL2S
+namespace tbo
 {
 	class signal
 	{
@@ -25,18 +25,18 @@ namespace SDL2S
 		std::string command;
 
 
-		friend bool operator !=(const SDL2S::signal&, const SDL2S::signal&);
+		friend bool operator !=(const tbo::signal&, const tbo::signal&);
 	};
-	bool operator !=(const SDL2S::signal& sig1, const SDL2S::signal& sig2);
+	bool operator !=(const tbo::signal& sig1, const tbo::signal& sig2);
 		
 
 	class signal_manager
 	{
 	private:
-		static std::vector<SDL2S::signal> signals;
+		static std::vector<tbo::signal> signals;
 	public:
-		static SDL2S::signal get_signal(const std::string& recipient);
-		static void add_signal(const SDL2S::signal& sig);
+		static tbo::signal get_signal(const std::string& recipient);
+		static void add_signal(const tbo::signal& sig);
 	};
 }
 

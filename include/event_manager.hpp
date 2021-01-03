@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL_events.h>
 
-namespace SDL2S
+namespace tbo
 {
 	class event_manager
 	{

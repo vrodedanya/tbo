@@ -8,14 +8,14 @@
 	#include <iostream>
 #endif
 
-namespace SDL2S
+namespace tbo
 {
 	class window
 	{
 	private:
 		SDL_Window* wind;
 		SDL_Renderer* renderer;
-		std::vector<SDL2S::renderable*> objects;
+		std::vector<tbo::renderable*> objects;
 	public:
 		explicit window(const char* title, int width = 100, int height = 100, int xpos = SDL_WINDOWPOS_CENTERED, int ypos = SDL_WINDOWPOS_CENTERED, Uint32 window_flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, Uint32 renderer_flags = SDL_RENDERER_ACCELERATED)
 		{
@@ -57,11 +57,11 @@ namespace SDL2S
 
 		void update();
 
-		std::vector<SDL2S::renderable*>& get_objects(){return objects;}
+		std::vector<tbo::renderable*>& get_objects(){return objects;}
 
-		void add_object(SDL2S::renderable* obj);
+		void add_object(tbo::renderable* obj);
 
-		void remove_object(SDL2S::renderable * obj);
+		void remove_object(tbo::renderable * obj);
 	};
 }
 

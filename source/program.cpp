@@ -3,20 +3,20 @@
 #include <stdexcept>
 #include "../include/signal_manager.hpp"
 
-void SDL2S::program::add_window(const std::string& name, const char* title, int width, int height, int xpos, int ypos, Uint32 window_flags, Uint32 renderer_flags)
+void tbo::program::add_window(const std::string& name, const char* title, int width, int height, int xpos, int ypos, Uint32 window_flags, Uint32 renderer_flags)
 {
-	SDL2S::window* win = new SDL2S::window(title, width, height, xpos, ypos, window_flags, renderer_flags);
+	tbo::window* win = new tbo::window(title, width, height, xpos, ypos, window_flags, renderer_flags);
 	windows_map[name] = win;
 	windows.emplace_back(win);
 }
 
-void SDL2S::program::loop()
+void tbo::program::loop()
 {
 	while (!windows.empty())
 	{
 		emanager->update();
-		SDL2S::signal sig;
-		while((sig = SDL2S::signal_manager::get_signal("program")) != SDL2S::signal("","",""))
+		tbo::signal sig;
+		while((sig = tbo::signal_manager::get_signal("program")) != tbo::signal("","",""))
 		{
 			if (sig.recipient != "")
 			{
@@ -29,7 +29,7 @@ void SDL2S::program::loop()
 				if (sig.command == "destroy window")
 				{
 					Uint32 id = std::stoi(sig.id);
-					auto it = std::find_if (windows.begin(), windows.end(), [id](SDL2S::window* w){return SDL_GetWindowID(w->get_window()) == id;});
+					auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
 
 					if (it != windows.end())
 					{
@@ -49,7 +49,7 @@ void SDL2S::program::loop()
 	}
 }
 
-SDL2S::window* SDL2S::program::get_window(const char* window_name)
+tbo::window* tbo::program::get_window(const char* window_name)
 {
 	if (windows_map.find(window_name) == windows_map.end())
 	{

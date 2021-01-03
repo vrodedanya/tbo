@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-namespace SDL2S
+namespace tbo
 {
 	class renderable
 	{
