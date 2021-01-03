@@ -6,6 +6,7 @@
 #include <map>
 #include <vector>
 #include "event_manager.hpp"
+#include "logger.hpp"
 
 namespace tbo
 {
@@ -20,6 +21,7 @@ namespace tbo
 		program(const program& prog) = delete;
 		~program()
 		{
+			tbo::logger::log("program", "was called destructor");
 			delete emanager;
 			for (auto& window : windows)
 			{
