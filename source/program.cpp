@@ -10,38 +10,45 @@ void tbo::program::add_window(const std::string& name, const char* title, int wi
 	windows.emplace_back(win);
 }
 
+
+void tbo::program::signal_handler()
+{
+	tbo::signal sig;
+	while((sig = tbo::signal_manager::get_signal("program")) != tbo::signal("","",""))
+	{
+#ifdef DEBUG
+		std::cerr << "Program receiving signal..." << std::endl;
+		std::cerr << "Recipient: " << sig.recipient << std::endl;
+		std::cerr << "ID       : " << sig.id << std::endl;
+		std::cerr << "Command  : " << sig.command << std::endl;
+#endif
+		if (sig.command == "destroy window")
+		{
+			Uint32 id = std::stoi(sig.id);
+			auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
+
+			if (it != windows.end())
+			{
+				delete *it;
+				windows.erase(it);
+#ifdef DEBUG
+				std::cerr << "Window with id " << id << " was destroyed" << std::endl;
+#endif
+			}
+		}
+		else
+		{
+			throw std::runtime_error("Unexpected command: " + sig.command);
+		}
+	}
+}
+
 void tbo::program::loop()
 {
 	while (!windows.empty())
 	{
 		emanager->update();
-		tbo::signal sig;
-		while((sig = tbo::signal_manager::get_signal("program")) != tbo::signal("","",""))
-		{
-			if (sig.recipient != "")
-			{
-#ifdef DEBUG
-				std::cerr << "Program receiving signal..." << std::endl;
-				std::cerr << "Recipient: " << sig.recipient << std::endl;
-				std::cerr << "ID       : " << sig.id << std::endl;
-				std::cerr << "Command  : " << sig.command << std::endl;
-#endif
-				if (sig.command == "destroy window")
-				{
-					Uint32 id = std::stoi(sig.id);
-					auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
-
-					if (it != windows.end())
-					{
-						delete *it;
-						windows.erase(it);
-#ifdef DEBUG
-						std::cerr << "Window with id " << id << " was destroyed" << std::endl;
-#endif
-					}
-				}
-			}
-		}
+		signal_handler();
 		for (auto& window : windows)
 		{
 			window->update();
