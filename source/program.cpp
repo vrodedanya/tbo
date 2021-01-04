@@ -14,7 +14,6 @@ void tbo::program::signal_handler()
 		{
 			Uint32 id = std::stoi(sig.id);
 			auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
-
 			if (it != windows.end())
 			{
 				delete *it;
@@ -29,6 +28,38 @@ void tbo::program::signal_handler()
 				}
 				tbo::logger::log("program", "window with id", id, "was destroyed");
 			}
+		}
+		else if (sig.command == "window shown")
+		{
+			Uint32 id = std::stoi(sig.id);
+			auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
+			(*it)->set_isShown(true);
+		}
+		else if (sig.command == "window hidden")
+		{
+			Uint32 id = std::stoi(sig.id);
+			auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
+			(*it)->set_isShown(false);
+		}
+		else if (sig.command == "window enter")
+		{
+			Uint32 id = std::stoi(sig.id);
+			auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
+			(*it)->set_isMouseIn(true);
+		}
+		else if (sig.command == "window leave")
+		{
+			Uint32 id = std::stoi(sig.id);
+			auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
+			(*it)->set_isMouseIn(false);
+		}
+		else if (sig.command == "move window")
+		{
+			//TODO Fix signal structure
+		}
+		else if (sig.command == "resize window")
+		{
+			//TODO Fix signal structure
 		}
 		else
 		{

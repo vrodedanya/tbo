@@ -14,6 +14,8 @@ namespace tbo
 		SDL_Window* wind;
 		SDL_Renderer* renderer;
 		std::vector<tbo::renderable*> objects;
+		bool isShown = true;
+		bool isMouseIn = false;
 	public:
 		explicit window(const char* title, int width = 100, int height = 100, int xpos = SDL_WINDOWPOS_CENTERED, int ypos = SDL_WINDOWPOS_CENTERED, Uint32 window_flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, Uint32 renderer_flags = SDL_RENDERER_ACCELERATED)
 		{
@@ -58,6 +60,12 @@ namespace tbo
 		void add_object(tbo::renderable* obj);
 
 		void remove_object(tbo::renderable * obj);
+
+		void set_isShown(bool _isShown){isShown = _isShown;}
+		bool get_isShown(){return isShown;}
+
+		void set_isMouseIn(bool _isMouseIn){isMouseIn = _isMouseIn;}
+		bool get_isMouseIn(){return isMouseIn;}
 	};
 }
 
