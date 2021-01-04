@@ -6,15 +6,18 @@
 
 void tbo::window::update()
 {
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-	SDL_RenderClear(renderer);
-
-	for (auto& obj : objects)
+	if (isShown)
 	{
-		obj->draw(renderer);
-	}
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+		SDL_RenderClear(renderer);
 
-	SDL_RenderPresent(renderer);
+		for (auto& obj : objects)
+		{
+			obj->draw(renderer);
+		}
+
+		SDL_RenderPresent(renderer);
+	}
 }
 
 void tbo::window::add_object(tbo::renderable* obj)

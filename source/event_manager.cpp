@@ -21,23 +21,27 @@ void tbo::event_manager::update()
 						tbo::signal_manager::add_signal(tbo::signal("program", std::to_string(event.window.windowID), "window hidded"));
 					case SDL_WINDOWEVENT_SHOWN:
 						tbo::logger::log("event manager", "caught shown window event from", event.window.windowID);
-						//tbo::signal_manager::add_signal(tbo::signal("program", std::to_string(event.window.windowID), "window shown"));
+						tbo::signal_manager::add_signal(tbo::signal("program", std::to_string(event.window.windowID), "window shown"));
 						break;
 					case SDL_WINDOWEVENT_EXPOSED:
-						tbo::logger::log("event manager", "caught exposed window event from", event.window.windowID, "- This event doesn't hadling now");
+						tbo::logger::log("event manager", "caught exposed window event from", event.window.windowID);
 						break;
 					case SDL_WINDOWEVENT_MOVED:
 						tbo::logger::log("event manager", "caught move window event from", event.window.windowID, "new coords are", event.window.data1, event.window.data2);
+						tbo::signal_manager::add_signal(tbo::signal("program", std::to_string(event.window.windowID), "move window"));
 						break;
 					case SDL_WINDOWEVENT_RESIZED:
 					case SDL_WINDOWEVENT_SIZE_CHANGED:
 						tbo::logger::log("event manager", "caught resize window event from", event.window.windowID);
+						tbo::signal_manager::add_signal(tbo::signal("program", std::to_string(event.window.windowID), "resize window"));
 						break;
 					case SDL_WINDOWEVENT_ENTER:
 						tbo::logger::log("event manager", "caught enter window event from", event.window.windowID);
+						tbo::signal_manager::add_signal(tbo::signal("program", std::to_string(event.window.windowID), "window enter"));
 						break;
 					case SDL_WINDOWEVENT_LEAVE:
 						tbo::logger::log("event manager", "caught leave window event from", event.window.windowID);
+						tbo::signal_manager::add_signal(tbo::signal("program", std::to_string(event.window.windowID), "window leave"));
 						break;
 					case SDL_WINDOWEVENT_TAKE_FOCUS:
 						tbo::logger::log("event manager", "caught take focus window event from", event.window.windowID);
