@@ -38,6 +38,8 @@ namespace tbo
 
 		static void set_priority(Priority prior){current_priority = prior;}
 
+		static tbo::logger::Priority get_priority(){return current_priority;}
+
 		template<typename... AArgs>
 		static void log(const std::string& sender, Priority prior, AArgs... MArgs)
 		{
