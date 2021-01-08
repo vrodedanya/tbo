@@ -4,6 +4,7 @@
 int main()
 {
 	tbo::program prog;
+	tbo::logger::set_priority(tbo::logger::MEDIUM_PRIORITY);
 
 	tbo::panel panel(100,500, 0, 0);
 	tbo::panel panel2(100, 500, 0, 150);
@@ -14,7 +15,7 @@ int main()
 	prog.get_window("main")->add_object(&panel);
 	prog.get_window("main")->add_object(&panel2);
 
-	prog.loop();
+	int code = prog.loop();
 
-	return 0;
+	return code;
 }

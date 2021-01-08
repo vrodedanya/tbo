@@ -9,7 +9,7 @@ void tbo::program::signal_handler()
 	tbo::signal sig;
 	while((sig = tbo::signal_manager::get_signal("program")) != tbo::signal("","",""))
 	{
-		tbo::logger::log("program", "receiving signal (", sig, ")");		
+		tbo::logger::log("program", tbo::logger::LOW_PRIORITY, "receiving signal (", sig, ")");		
 		if (sig.command == "destroy window")
 		{
 			Uint32 id = std::stoi(sig.id);
@@ -26,7 +26,7 @@ void tbo::program::signal_handler()
 						break;
 					}
 				}
-				tbo::logger::log("program", "window with id", id, "was destroyed");
+				tbo::logger::log("program", tbo::logger::MEDIUM_PRIORITY, "window with id", id, "was destroyed");
 			}
 		}
 		else if (sig.command == "window shown")
@@ -68,17 +68,26 @@ void tbo::program::signal_handler()
 	}
 }
 
-void tbo::program::loop()
+int tbo::program::loop()
 {
 	while (!windows.empty())
 	{
-		emanager->update();
-		signal_handler();
-		for (auto& window : windows)
+		try
 		{
-			window->update();
+			emanager->update();
+			signal_handler();
+			for (auto& window : windows)
+			{
+				window->update();
+			}
+		}
+		catch (const std::exception& except)
+		{
+			tbo::logger::log("program", tbo::logger::HIGH_PRIORITY, except.what());
+			return EXIT_FAILURE;
 		}
 	}
+	return EXIT_SUCCESS;
 }
 
 void tbo::program::add_window(const std::string& name, const char* title, int width, int height, int xpos, int ypos, Uint32 window_flags, Uint32 renderer_flags)
@@ -86,7 +95,7 @@ void tbo::program::add_window(const std::string& name, const char* title, int wi
 	tbo::window* win = new tbo::window(title, width, height, xpos, ypos, window_flags, renderer_flags);
 	windows_map[name] = win;
 	windows.emplace_back(win);
-	tbo::logger::log("program", "added new window with name", name);
+	tbo::logger::log("program", tbo::logger::MEDIUM_PRIORITY, "added new window with name", name);
 }
 
 tbo::window* tbo::program::get_window(const char* window_name)
