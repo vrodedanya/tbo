@@ -21,12 +21,12 @@ namespace tbo
 		program(const program& prog) = delete;
 		~program()
 		{
-			tbo::logger::log("program", tbo::logger::MEDIUM_PRIORITY, "was called destructor");
 			delete emanager;
 			for (auto& window : windows)
 			{
 				delete window;
 			}
+			tbo::logger::log("program", tbo::logger::MEDIUM_PRIORITY, "was called destructor");
 		}
 		void add_window(const std::string& name, const char* title, int width = 100, int height = 100, int xpos = SDL_WINDOWPOS_CENTERED, int ypos = SDL_WINDOWPOS_CENTERED, Uint32 window_flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, Uint32 renderer_flags = SDL_RENDERER_ACCELERATED);
 
@@ -34,7 +34,7 @@ namespace tbo
 
 		tbo::event_manager* get_eventManager(){return emanager;}
 
-		void loop();
+		int loop();
 
 		void signal_handler();
 

@@ -6,7 +6,6 @@
 
 namespace tbo
 {
-	
 	class logger
 	{
 	public:

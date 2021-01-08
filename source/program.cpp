@@ -68,17 +68,26 @@ void tbo::program::signal_handler()
 	}
 }
 
-void tbo::program::loop()
+int tbo::program::loop()
 {
 	while (!windows.empty())
 	{
-		emanager->update();
-		signal_handler();
-		for (auto& window : windows)
+		try
 		{
-			window->update();
+			emanager->update();
+			signal_handler();
+			for (auto& window : windows)
+			{
+				window->update();
+			}
+		}
+		catch (const std::exception& except)
+		{
+			tbo::logger::log("program", tbo::logger::HIGH_PRIORITY, except.what());
+			return EXIT_FAILURE;
 		}
 	}
+	return EXIT_SUCCESS;
 }
 
 void tbo::program::add_window(const std::string& name, const char* title, int width, int height, int xpos, int ypos, Uint32 window_flags, Uint32 renderer_flags)
