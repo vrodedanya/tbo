@@ -21,7 +21,7 @@ namespace tbo
 		program(const program& prog) = delete;
 		~program()
 		{
-			tbo::logger::log("program", "was called destructor");
+			tbo::logger::log("program", tbo::logger::MEDIUM_PRIORITY, "was called destructor");
 			delete emanager;
 			for (auto& window : windows)
 			{
