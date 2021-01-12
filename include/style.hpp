@@ -17,17 +17,19 @@ namespace tbo
 	public:
 		struct Position
 		{
-			double x;
-			double y;
+			int x;
+			int y;
 		} position;
 		struct Size
 		{
-			double width;
-			double height;
+			int width;
+			int height;
 
 		} size;
 
 	};
+	int operator&(int num, const style::Measure& mes);
+	int operator|(int num, const style::Measure& mes);
 }
 
 #endif
