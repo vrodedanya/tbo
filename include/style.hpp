@@ -7,10 +7,28 @@ namespace tbo
 {
 	class style
 	{
+	public:
+		enum measure
+		{
+			PERCENT = 1,
+			PIXELS = 2
+		};
 	private:
 	public:
-		std::string top;
-		std::string left;
+		struct position
+		{
+			measure measure;
+			double x;
+			double y;
+		} position;
+		struct size
+		{
+			measure measure;
+			double width;
+			double height;
+
+		} size;
+
 	};
 }
 

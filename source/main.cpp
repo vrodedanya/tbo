@@ -1,10 +1,19 @@
 #include "../include/program.hpp"
 #include "../include/panel.hpp"
+#include "../include/style.hpp"
 
 int main()
 {
 	tbo::program prog;
 	tbo::logger::set_priority(tbo::logger::MEDIUM_PRIORITY);
+
+	tbo::style style1;
+	style1.position.measure = tbo::style::PERCENT;
+	style1.position.x = 50;
+	style1.position.y = 50;
+	style1.size.measure = tbo::style::PIXELS;
+	style1.size.width = 40;
+	style1.size.height = 40;
 
 	tbo::panel panel(100,500, 0, 0);
 	tbo::panel panel2(100, 500, 0, 150);
