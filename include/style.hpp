@@ -8,22 +8,20 @@ namespace tbo
 	class style
 	{
 	public:
-		enum measure
+		enum Measure
 		{
-			PERCENT = 1,
-			PIXELS = 2
+			PIXELS = 0,
+			PERCENT = 256
 		};
 	private:
 	public:
-		struct position
+		struct Position
 		{
-			measure measure;
 			double x;
 			double y;
 		} position;
-		struct size
+		struct Size
 		{
-			measure measure;
 			double width;
 			double height;
 
