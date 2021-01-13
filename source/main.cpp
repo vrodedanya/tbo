@@ -12,6 +12,7 @@ int main()
 	style1.position.y = 10 | tbo::style::PIXELS;
 	style1.size.width = 49 | tbo::style::PERCENT;
 	style1.size.height = 100 | tbo::style::PIXELS;
+	style1.color = tbo::style::rgba(255, 255, 255, 0);
 
 	tbo::panel panel(tbo::renderable::PANEL, style1, 500, 500);
 

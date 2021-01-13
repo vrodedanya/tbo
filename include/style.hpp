@@ -14,25 +14,6 @@ namespace tbo
 			PIXELS = 0,
 			PERCENT = 2147483648 
 		};
-		class color
-		{
-		public:
-			explicit color(tbo::byte r, tbo::byte g, tbo::byte b, tbo::byte a)
-			{
-				this->r = r;
-				this->g = g;
-				this->b = b;
-				this->a = a;
-			}
-			color() : r(0), g(0), b(0), a(0)
-			{
-			}
-			color& operator = (const color& color) = default;
-			tbo::byte r;
-			tbo::byte g;
-			tbo::byte b;
-			tbo::byte a;
-		};
 	private:
 	public:
 		struct Position
@@ -46,7 +27,26 @@ namespace tbo
 			int height;
 
 		} size;
-		tbo::style::color color;
+		class rgba
+		{
+		public:
+			explicit rgba(tbo::byte r, tbo::byte g, tbo::byte b, tbo::byte a)
+			{
+				this->r = r;
+				this->g = g;
+				this->b = b;
+				this->a = a;
+			}
+			rgba() : r(0), g(0), b(0), a(0)
+			{
+			}
+			rgba& operator = (const rgba& color) = default;
+			tbo::byte r;
+			tbo::byte g;
+			tbo::byte b;
+			tbo::byte a;
+		} color;
+
 	};
 	int operator&(int num, const style::Measure& mes);
 	int operator|(int num, const style::Measure& mes);

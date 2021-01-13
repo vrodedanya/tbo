@@ -3,7 +3,7 @@
 
 void tbo::panel::draw(SDL_Renderer* renderer)
 {
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 0);
+	SDL_SetRenderDrawColor(renderer, style.color.r, style.color.g, style.color.b, style.color.a);
 
 	int x = (style.position.x & tbo::style::PERCENT) == static_cast<int>(tbo::style::PERCENT) ? (static_cast<double>(style.position.x & static_cast<int>(tbo::style::PERCENT - 1)) / 100) * window.width : style.position.x;
 	int y = (style.position.y & tbo::style::PERCENT) == static_cast<int>(tbo::style::PERCENT) ? (static_cast<double>(style.position.y & static_cast<int>(tbo::style::PERCENT - 1)) / 100) * window.height : style.position.y;
