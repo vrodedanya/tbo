@@ -11,7 +11,7 @@ namespace tbo
 		enum Measure
 		{
 			PIXELS = 0,
-			PERCENT = 256
+			PERCENT = 2147483648 
 		};
 	private:
 	public:

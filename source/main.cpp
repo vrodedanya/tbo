@@ -8,10 +8,10 @@ int main()
 	tbo::logger::set_priority(tbo::logger::MEDIUM_PRIORITY);
 
 	tbo::style style1;
-	style1.position.x = 30 | tbo::style::PERCENT;
-	style1.position.y = 30 | tbo::style::PERCENT;
-	style1.size.width = 50 | tbo::style::PIXELS;
-	style1.size.height = 50 | tbo::style::PIXELS;
+	style1.position.x = 50 | tbo::style::PERCENT;
+	style1.position.y = 10 | tbo::style::PIXELS;
+	style1.size.width = 49 | tbo::style::PERCENT;
+	style1.size.height = 100 | tbo::style::PIXELS;
 
 	tbo::panel panel(tbo::renderable::PANEL, style1, 500, 500);
 
