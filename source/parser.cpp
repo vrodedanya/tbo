@@ -17,6 +17,10 @@ std::vector<std::string> tbo::parser::split(const std::string& str, char separat
 			buffer_string = "";
 		}
 	}
+	if (!buffer_string.empty())
+	{
+		buffer_vector.push_back(buffer_string);
+	}
 
 	return buffer_vector;
 }
