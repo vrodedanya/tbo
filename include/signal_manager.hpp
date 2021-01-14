@@ -17,11 +17,10 @@ namespace tbo
 		signal()
 		{
 		}
-		signal(const std::string& _recipient, const std::string& _id, const std::string& _command) : recipient(_recipient), id(_id), command(_command)
+		signal(const std::string& _recipient, const std::string& _command) : recipient(_recipient), command(_command)
 		{
 		}
 		std::string recipient;
-		std::string id;
 		std::string command;
 
 		friend bool operator !=(const tbo::signal&, const tbo::signal&);
@@ -32,7 +31,6 @@ namespace tbo
 	bool operator !=(const tbo::signal& sig1, const tbo::signal& sig2);
 	std::ostream& operator <<(std::ostream& os, const tbo::signal& sig);
 		
-
 	class signal_manager
 	{
 	private:

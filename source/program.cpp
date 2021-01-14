@@ -3,14 +3,17 @@
 #include <stdexcept>
 #include "../include/signal_manager.hpp"
 #include "../include/logger.hpp"
+#include "../include/parser.hpp"
 
 void tbo::program::signal_handler()
 {
 	tbo::signal sig;
-	while((sig = tbo::signal_manager::get_signal("program")) != tbo::signal("","",""))
+	while((sig = tbo::signal_manager::get_signal("program")) != tbo::signal("",""))
 	{
 		tbo::logger::log("program", tbo::logger::LOW_PRIORITY, "receiving signal (", sig, ")");		
-		if (sig.command == "destroy window")
+		tbo::parser::split("check     string              okey? Man 24       43", ' ');
+		
+		/*if (sig.command == "destroy window")
 		{
 			Uint32 id = std::stoi(sig.id);
 			auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
@@ -64,7 +67,7 @@ void tbo::program::signal_handler()
 		else
 		{
 			throw std::runtime_error("Unexpected command: " + sig.command);
-		}
+		}*/
 	}
 }
 
