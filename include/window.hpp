@@ -34,15 +34,14 @@ namespace tbo
 				throw std::runtime_error("Creating window error");
 			}
 			tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "new window was created with id", SDL_GetWindowID(wind));
-
-			SDL_GetWindowPosition(wind, &xpos, &ypos);
-			SDL_GetWindowSize(wind, &width, &height);
-
+ 
 			if ((renderer = SDL_CreateRenderer(wind, -1, renderer_flags)) == NULL)
 			{
 				throw std::runtime_error("Creating renderer error");
 			}
 			tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "window's renderer was created");
+			SDL_GetWindowPosition(wind, &this->xpos, &this->ypos);
+			SDL_GetWindowSize(wind, &this->width, &this->height);
 		}	
 		window(const window& wind) = delete;
 		window(window&& w)
@@ -64,6 +63,8 @@ namespace tbo
 
 		void update();
 
+		void update_objects();
+
 		std::vector<tbo::renderable*>& get_objects(){return objects;}
 
 		void add_object(tbo::renderable* obj);
@@ -76,14 +77,14 @@ namespace tbo
 		void set_isMouseIn(bool _isMouseIn){isMouseIn = _isMouseIn;}
 		bool get_isMouseIn(){return isMouseIn;}
 
-		void set_width(int width){this->width = width;}
+		void set_width(int width){this->width = width;update_objects();}
 		int get_width(){return width;}
-		void set_height(int height){this->height = height;}
+		void set_height(int height){this->height = height;update_objects();}
 		int get_height(){return height;}
 
-		void set_xpos(int xpos){this->xpos = xpos;}
+		void set_xpos(int xpos){this->xpos = xpos;update_objects();}
 		int get_xpos(){return xpos;}
-		void set_ypos(int ypos){this->ypos = ypos;}
+		void set_ypos(int ypos){this->ypos = ypos;update_objects();}
 		int get_ypos(){return ypos;}
 	};
 }

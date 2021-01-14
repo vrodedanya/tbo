@@ -10,13 +10,6 @@ namespace tbo
 	class panel : public tbo::renderable
 	{
 	private:
-		struct
-		{
-			int width;
-			int height;
-			int xpos;
-			int ypos;
-		} window;
 		tbo::style style;
 	public:
 		explicit panel(tbo::renderable::Type type, tbo::style _style, int window_width, int window_height) : style(_style)

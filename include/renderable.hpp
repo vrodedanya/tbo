@@ -13,6 +13,13 @@ namespace tbo
 			PANEL = 1,
 			OTHER = 2
 		};
+		struct
+		{
+			int width;
+			int height;
+			int xpos;
+			int ypos;
+		} window;
 	protected:
 		Type type;
 	public:
