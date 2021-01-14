@@ -16,6 +16,11 @@ namespace tbo
 		std::vector<tbo::renderable*> objects;
 		bool isShown = true;
 		bool isMouseIn = false;
+
+		int width;
+		int height;
+		int xpos;
+		int ypos;
 	public:
 		explicit window(const char* title, int width = 100, int height = 100, int xpos = SDL_WINDOWPOS_CENTERED, int ypos = SDL_WINDOWPOS_CENTERED, Uint32 window_flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, Uint32 renderer_flags = SDL_RENDERER_ACCELERATED)
 		{
@@ -29,6 +34,10 @@ namespace tbo
 				throw std::runtime_error("Creating window error");
 			}
 			tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "new window was created with id", SDL_GetWindowID(wind));
+
+			SDL_GetWindowPosition(wind, &xpos, &ypos);
+			SDL_GetWindowSize(wind, &width, &height);
+
 			if ((renderer = SDL_CreateRenderer(wind, -1, renderer_flags)) == NULL)
 			{
 				throw std::runtime_error("Creating renderer error");
@@ -66,6 +75,16 @@ namespace tbo
 
 		void set_isMouseIn(bool _isMouseIn){isMouseIn = _isMouseIn;}
 		bool get_isMouseIn(){return isMouseIn;}
+
+		void set_width(int width){this->width = width;}
+		int get_width(){return width;}
+		void set_height(int height){this->height = height;}
+		int get_height(){return height;}
+
+		void set_xpos(int xpos){this->xpos = xpos;}
+		int get_xpos(){return xpos;}
+		void set_ypos(int ypos){this->ypos = ypos;}
+		int get_ypos(){return ypos;}
 	};
 }
 
