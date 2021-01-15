@@ -12,13 +12,13 @@ namespace tbo
 	private:
 		tbo::style style;
 	public:
-		explicit panel(tbo::renderable::Type type, tbo::style _style, int window_width, int window_height) : style(_style)
+		explicit panel(tbo::renderable::Type type, tbo::style _style) : style(_style)
 		{
 			this->type = type;
-			window.width = window_width;
-			window.height = window_height;
 		}
 		void draw(SDL_Renderer* renderer);
+
+		tbo::style& get_style(){return style;}
 	};
 }
 
