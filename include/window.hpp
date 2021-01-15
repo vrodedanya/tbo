@@ -63,13 +63,13 @@ namespace tbo
 
 		void update();
 
-		void update_objects();
+		void update_window(int width, int height, int xpos, int ypos);
 
 		std::vector<tbo::renderable*>& get_objects(){return objects;}
 
 		void add_object(tbo::renderable* obj);
 
-		void remove_object(tbo::renderable * obj);
+		void remove_object(tbo::renderable* obj);
 
 		void set_isShown(bool _isShown){isShown = _isShown;}
 		bool get_isShown(){return isShown;}
@@ -77,14 +77,14 @@ namespace tbo
 		void set_isMouseIn(bool _isMouseIn){isMouseIn = _isMouseIn;}
 		bool get_isMouseIn(){return isMouseIn;}
 
-		void set_width(int width){this->width = width;update_objects();}
+		void set_width(int width){this->width = width;}
 		int get_width(){return width;}
-		void set_height(int height){this->height = height;update_objects();}
+		void set_height(int height){this->height = height;}
 		int get_height(){return height;}
 
-		void set_xpos(int xpos){this->xpos = xpos;update_objects();}
+		void set_xpos(int xpos){this->xpos = xpos;}
 		int get_xpos(){return xpos;}
-		void set_ypos(int ypos){this->ypos = ypos;update_objects();}
+		void set_ypos(int ypos){this->ypos = ypos;}
 		int get_ypos(){return ypos;}
 	};
 }

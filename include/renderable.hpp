@@ -20,9 +20,9 @@ namespace tbo
 			int xpos;
 			int ypos;
 		} window;
-	protected:
+
 		Type type;
-	public:
+		virtual ~renderable(){}
 		virtual void draw(SDL_Renderer* renderer) = 0;
 	};
 }

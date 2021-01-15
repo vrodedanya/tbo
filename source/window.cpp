@@ -26,8 +26,6 @@ void tbo::window::add_object(tbo::renderable* obj)
 	{
 		throw std::runtime_error("Object is already exist");
 	}
-	std::cout << xpos << " " << ypos << std::endl;
-	std::cout << width << " " << height << std::endl;
 	obj->window.width  = width;
 	obj->window.height = height;
 	obj->window.xpos   = xpos;
@@ -44,13 +42,10 @@ void tbo::window::remove_object(tbo::renderable * obj)
 	tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "object was removed from render");
 }
 
-void tbo::window::update_objects()
+void tbo::window::update_window(int width, int height, int xpos, int ypos)
 {
-	for (auto& obj : objects)
-	{
-		obj->window.width  = width;
-		obj->window.height = height;
-		obj->window.xpos   = xpos;
-		obj->window.ypos   = ypos;
-	}
+	this->width  = width;
+	this->height = height;
+	this->xpos   = xpos;
+	this->ypos   = ypos;
 }

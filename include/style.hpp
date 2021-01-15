@@ -14,8 +14,7 @@ namespace tbo
 			PIXELS = 0,
 			PERCENT = 2147483648 
 		};
-	private:
-	public:
+
 		struct Position
 		{
 			int x;
@@ -46,7 +45,6 @@ namespace tbo
 			tbo::byte b;
 			tbo::byte a;
 		} color;
-
 	};
 	int operator&(int num, const style::Measure& mes);
 	int operator|(int num, const style::Measure& mes);

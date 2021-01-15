@@ -12,9 +12,12 @@ namespace tbo
 	private:
 		tbo::style style;
 	public:
-		explicit panel(tbo::renderable::Type type, tbo::style _style) : style(_style)
+		explicit panel(tbo::style _style) : style(_style)
 		{
-			this->type = type;
+			this->type = tbo::renderable::PANEL;
+		}
+		~panel()
+		{
 		}
 		void draw(SDL_Renderer* renderer);
 
