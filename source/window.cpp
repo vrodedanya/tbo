@@ -8,7 +8,7 @@ void tbo::window::update()
 {
 	if (isShown)
 	{
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+		SDL_SetRenderDrawColor(renderer, body->get_style().color.r, body->get_style().color.g, body->get_style().color.b, body->get_style().color.a);
 		SDL_RenderClear(renderer);
 
 		for (auto& obj : objects)
@@ -26,10 +26,13 @@ void tbo::window::add_object(tbo::renderable* obj)
 	{
 		throw std::runtime_error("Object is already exist");
 	}
-	obj->window.width  = width;
-	obj->window.height = height;
-	obj->window.xpos   = xpos;
-	obj->window.ypos   = ypos;
+	if (obj->type == tbo::renderable::PANEL)
+	{
+		if(static_cast<tbo::panel*>(obj)->get_parent() == nullptr)
+		{	
+			static_cast<tbo::panel*>(obj)->set_parent(body);
+		}
+	}
 	objects.emplace_back(obj);
 	tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "new object was added to render");
 }
@@ -40,12 +43,4 @@ void tbo::window::remove_object(tbo::renderable * obj)
 	if (it == objects.end()) throw std::runtime_error("Object doesn't exist");
 	objects.erase(it);
 	tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "object was removed from render");
-}
-
-void tbo::window::update_window(int width, int height, int xpos, int ypos)
-{
-	this->width  = width;
-	this->height = height;
-	this->xpos   = xpos;
-	this->ypos   = ypos;
 }

@@ -60,15 +60,15 @@ void tbo::program::signal_handler()
 		{
 			Uint32 id = std::stoi(command[1]);
 			auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
-			(*it)->set_xpos(std::stoi(command[2]));
-			(*it)->set_ypos(std::stoi(command[3]));
+			(*it)->get_style().position.x = std::stoi(command[2]);
+			(*it)->get_style().position.y = std::stoi(command[3]);
 		}
 		else if (command[0] == "resize")
 		{
 			Uint32 id = std::stoi(command[1]);
 			auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
-			(*it)->set_width(std::stoi(command[2]));
-			(*it)->set_height(std::stoi(command[3]));
+			(*it)->get_style().size.width  = std::stoi(command[2]);
+			(*it)->get_style().size.height = std::stoi(command[3]);
 		}
 		else
 		{

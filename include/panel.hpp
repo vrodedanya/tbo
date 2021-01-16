@@ -11,6 +11,7 @@ namespace tbo
 	{
 	private:
 		tbo::style style;
+		tbo::panel* parent = nullptr;
 	public:
 		explicit panel(tbo::style _style) : style(_style)
 		{
@@ -22,6 +23,8 @@ namespace tbo
 		void draw(SDL_Renderer* renderer);
 
 		tbo::style& get_style(){return style;}
+		void set_parent(tbo::panel* parent){this->parent = parent;}
+		tbo::panel* get_parent(){return parent;}
 	};
 }
 
