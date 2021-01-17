@@ -23,8 +23,13 @@ namespace tbo
 		void draw(SDL_Renderer* renderer);
 
 		tbo::style& get_style(){return style;}
-		void set_parent(tbo::panel* parent){this->parent = parent;}
+		void set_parent(tbo::panel* _parent){this->parent = _parent;}
 		tbo::panel* get_parent(){return parent;}
+
+		int get_pixel_xpos();
+		int get_pixel_ypos();
+		int get_pixel_width();
+		int get_pixel_height();
 	};
 }
 
