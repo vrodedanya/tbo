@@ -15,7 +15,7 @@ CC := g++
 # File extension (ex: .cpp, .c)
 LANG := .cpp
 # Compiler flags (ex: -Wall, -O2, -g)
-CFLAGS := -Wall -O0 -g
+CFLAGS := -Wall -O0 -g -std=c++17
 # Linker flags (ex: -g )
 LDFLAGS := -g
 # Libs (ex: -lm, -lncurses, -lSDL2)
