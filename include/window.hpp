@@ -44,8 +44,8 @@ namespace tbo
 			style.color.g = 0;
 			style.color.b = 0;
 			style.color.a = 0;
-			style.position.x = xpos | tbo::style::PIXELS;
-			style.position.y = ypos | tbo::style::PIXELS;
+			style.position.x = 0;
+			style.position.y = 0;
 			style.size.width = width | tbo::style::PIXELS;
 			style.size.height = height | tbo::style::PIXELS;
 			body = new tbo::panel(style);
