@@ -45,6 +45,8 @@ namespace tbo
 			tbo::byte b;
 			tbo::byte a;
 		} color;
+		static bool isPercent(int value);
+		static double get_fraction(int percent);
 	};
 	int operator&(int num, const style::Measure& mes);
 	int operator|(int num, const style::Measure& mes);
