@@ -74,6 +74,8 @@ int main()
 	main.size.height = 90 | tbo::style::PERCENT;
 	main.position.x = 5 | tbo::style::PERCENT;
 	main.position.y = 5 | tbo::style::PERCENT;
+	main.margin.left = 5 | tbo::style::PERCENT;
+	main.margin.top = 20 | tbo::style::PERCENT;
 	main.color.r = 255;
 	main.color.g = 255;
 	main.color.b = 255;

@@ -27,7 +27,9 @@ int tbo::panel::get_pixel_xpos()
 	}
 	else
 	{
-		int current = (tbo::style::isPercent(style.position.x) ? tbo::style::get_fraction(style.position.x) * parent->get_pixel_width() : style.position.x);
+		int margin = tbo::style::isPercent(parent->get_style().margin.absolute) ? tbo::style::get_fraction(parent->get_style().margin.absolute) * parent->get_pixel_width() : parent->get_style().margin.absolute;
+		margin += tbo::style::isPercent(parent->get_style().margin.left) ? tbo::style::get_fraction(parent->get_style().margin.left) * parent->get_pixel_width() : parent->get_style().margin.left;
+		int current = (tbo::style::isPercent(style.position.x) ? (margin + tbo::style::get_fraction(style.position.x) * parent->get_pixel_width()) : (margin + style.position.x));
 		return current + parent->get_pixel_xpos(); 
 	}
 }
@@ -40,7 +42,9 @@ int tbo::panel::get_pixel_ypos()
 	}
 	else
 	{
-		int current = (tbo::style::isPercent(style.position.y) ? tbo::style::get_fraction(style.position.y) * parent->get_pixel_height() : style.position.y);
+		int margin = tbo::style::isPercent(parent->get_style().margin.absolute) ? tbo::style::get_fraction(parent->get_style().margin.absolute) * parent->get_pixel_width() : parent->get_style().margin.absolute;
+		margin += tbo::style::isPercent(parent->get_style().margin.top) ? tbo::style::get_fraction(parent->get_style().margin.top) * parent->get_pixel_height() : parent->get_style().margin.top;
+		int current = (tbo::style::isPercent(style.position.y) ? (margin + tbo::style::get_fraction(style.position.y) * parent->get_pixel_height()) : (margin + style.position.y));
 		return current + parent->get_pixel_ypos(); 
 	}
 }
