@@ -37,6 +37,24 @@ void tbo::window::add_object(tbo::renderable* obj)
 	tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "new object was added to render");
 }
 
+tbo::panel& tbo::window::add_panel(tbo::style style)
+{
+	tbo::panel* buf = new tbo::panel(style);
+	buf->set_parent(body);
+	objects.emplace_back(buf);
+	tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "new panel was added to render");
+	return *buf;
+}
+
+tbo::panel& tbo::window::add_panel(tbo::style style, tbo::panel* parent)
+{
+	tbo::panel* buf = new tbo::panel(style);
+	buf->set_parent(parent);
+	objects.emplace_back(buf);
+	tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "new panel was added to render");
+	return *buf;
+}
+
 void tbo::window::remove_object(tbo::renderable * obj)
 {
 	auto it = std::find(objects.begin(), objects.end(), obj);

@@ -77,6 +77,9 @@ namespace tbo
 
 		void add_object(tbo::renderable* obj);
 
+		tbo::panel& add_panel(tbo::style style);
+		tbo::panel& add_panel(tbo::style style, tbo::panel* parent);
+
 		void remove_object(tbo::renderable* obj);
 
 		void set_isShown(bool _isShown){isShown = _isShown;}

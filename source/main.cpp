@@ -89,34 +89,23 @@ int main()
 	common.color.g = 210;
 	common.color.b = 210;
 
-	tbo::panel panel1(main);
-
-	tbo::panel panel2(common);
-	tbo::panel panel3(common);
-	tbo::panel panel4(common);
-	tbo::panel panel5(common);
-
-	panel2.set_parent(&panel1);
-	panel3.set_parent(&panel1);
-	panel4.set_parent(&panel1);
-	panel5.set_parent(&panel1);
-
-	panel3.get_style().position.y = 20 | tbo::style::PERCENT;
-	panel4.get_style().position.y = 35 | tbo::style::PERCENT;
-	panel5.get_style().position.y = 50 | tbo::style::PERCENT;
-
 	prog.add_window("main", "title", 500, 500);
-	prog.get_window("main")->add_object(&panel1);
-	prog.get_window("main")->add_object(&panel2);
-	prog.get_window("main")->add_object(&panel3);
-	prog.get_window("main")->add_object(&panel4);
-	prog.get_window("main")->add_object(&panel5);
 
 	prog.get_window("main")->get_style().color.r = 255;
 	prog.get_window("main")->get_style().color.g = 0;
 	prog.get_window("main")->get_style().color.b = 255;
 	prog.get_window("main")->get_style().color.a = 255;
 
+	tbo::panel& panel1 = prog.get_window("main")->add_panel(main);
+	tbo::panel& panel2 = prog.get_window("main")->add_panel(common, &panel1);
+	tbo::panel& panel3 = prog.get_window("main")->add_panel(common, &panel1);
+	tbo::panel& panel4 = prog.get_window("main")->add_panel(common, &panel1);
+	tbo::panel& panel5 = prog.get_window("main")->add_panel(common, &panel1);
+
+	panel3.get_style().position.y = 20 | tbo::style::PERCENT;
+	panel4.get_style().position.y = 35 | tbo::style::PERCENT;
+	panel5.get_style().position.y = 50 | tbo::style::PERCENT;
+	
 	int code = prog.loop();
 
 	return code;
