@@ -21,9 +21,8 @@ namespace tbo
 		} position;
 		struct Size
 		{
-			int width = 0;
+			int width  = 0;
 			int height = 0;
-
 		} size;
 		struct rgba
 		{
@@ -46,7 +45,14 @@ namespace tbo
 		} color;
 		static bool isPercent(int value);
 		static double get_fraction(int percent);
-		int margin = 0;
+		struct Margin
+		{
+			int absolute = 0;
+			int top      = 0;
+			int bot      = 0;
+			int right    = 0;
+			int left     = 0;
+		} margin;
 	};
 	int operator&(int num, const style::Measure& mes);
 	int operator|(int num, const style::Measure& mes);
