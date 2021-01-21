@@ -6,9 +6,8 @@
 namespace tbo
 {
 	using byte = unsigned char;
-	class style
+	struct style
 	{
-	public:
 		enum Measure
 		{
 			PIXELS = 0,
@@ -26,7 +25,7 @@ namespace tbo
 			int height = 0;
 
 		} size;
-		class rgba
+		struct rgba
 		{
 		public:
 			explicit rgba(tbo::byte r, tbo::byte g, tbo::byte b, tbo::byte a)
@@ -47,6 +46,7 @@ namespace tbo
 		} color;
 		static bool isPercent(int value);
 		static double get_fraction(int percent);
+		int margin = 0;
 	};
 	int operator&(int num, const style::Measure& mes);
 	int operator|(int num, const style::Measure& mes);

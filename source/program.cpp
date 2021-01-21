@@ -58,8 +58,8 @@ void tbo::program::signal_handler()
 		}
 		else if (command[0] == "move")
 		{
-			Uint32 id = std::stoi(command[1]);
-			auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
+			//Uint32 id = std::stoi(command[1]);
+			//auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
 		}
 		else if (command[0] == "resize")
 		{
