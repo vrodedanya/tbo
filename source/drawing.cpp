@@ -11,7 +11,6 @@ void tbo::drawing::line(SDL_Renderer* renderer, int x1, int y1, int x2, int y2, 
 	{
 		brash.x = xpos - brash.w / 2;
 		brash.y = ypos - brash.h / 2;
-		std::cout << brash.w << " " << brash.h << " " << brash.x << " " << brash.y << std::endl;
 
 		SDL_RenderFillRect(renderer, &brash);
 

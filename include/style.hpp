@@ -67,6 +67,7 @@ namespace tbo
 		{
 			BorderStyle style = tbo::style::HIDDEN;
 			rgba color;
+			unsigned width = 1;
 		} border;
 		
 
