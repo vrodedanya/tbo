@@ -74,27 +74,26 @@ int main()
 	main.size.height = 90 | tbo::style::PERCENT;
 	main.position.x = 5 | tbo::style::PERCENT;
 	main.position.y = 5 | tbo::style::PERCENT;
-	main.margin.left = 5 | tbo::style::PERCENT;
-	main.margin.top = 20 | tbo::style::PERCENT;
-	main.color.r = 255;
-	main.color.g = 255;
-	main.color.b = 255;
+	main.background.color.r = 255;
+	main.background.color.g = 255;
+	main.background.color.b = 255;
 
 	tbo::style common;
 	common.size.width = 90 | tbo::style::PERCENT;
 	common.size.height = 10 | tbo::style::PERCENT;
 	common.position.x = 5 | tbo::style::PERCENT;
 	common.position.y = 5 | tbo::style::PERCENT;
-	common.color.r = 210;
-	common.color.g = 210;
-	common.color.b = 210;
+	common.background.color.r = 210;
+	common.background.color.g = 210;
+	common.background.color.b = 210;
+	common.border.style = tbo::style::SOLID;
 
 	prog.add_window("main", "title", 500, 500);
 
-	prog.get_window("main")->get_style().color.r = 255;
-	prog.get_window("main")->get_style().color.g = 0;
-	prog.get_window("main")->get_style().color.b = 255;
-	prog.get_window("main")->get_style().color.a = 255;
+	prog.get_window("main")->get_style().background.color.r = 255;
+	prog.get_window("main")->get_style().background.color.g = 0;
+	prog.get_window("main")->get_style().background.color.b = 255;
+	prog.get_window("main")->get_style().background.color.a = 255;
 
 	tbo::panel& panel1 = prog.get_window("main")->add_panel(main);
 	tbo::panel& panel2 = prog.get_window("main")->add_panel(common, &panel1);

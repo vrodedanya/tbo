@@ -3,7 +3,7 @@
 
 void tbo::panel::draw(SDL_Renderer* renderer)
 {
-	SDL_SetRenderDrawColor(renderer, style.color.r, style.color.g, style.color.b, style.color.a);
+	SDL_SetRenderDrawColor(renderer, style.background.color.r, style.background.color.g, style.background.color.b, style.background.color.a);
 
 	int x = get_pixel_xpos();
 	int y = get_pixel_ypos();
@@ -16,6 +16,15 @@ void tbo::panel::draw(SDL_Renderer* renderer)
 		{
 			SDL_RenderDrawPoint(renderer, xpos, ypos);
 		}
+	}
+
+	if (style.border.style != tbo::style::HIDDEN)
+	{
+		SDL_SetRenderDrawColor(renderer, style.border.color.r, style.border.color.g, style.border.color.b, style.border.color.a);
+		SDL_RenderDrawLine(renderer, x, y, x + w, y);
+		SDL_RenderDrawLine(renderer, x + w, y, x + w, y + h);
+		SDL_RenderDrawLine(renderer, x + w, y + h, x, y + h);
+		SDL_RenderDrawLine(renderer, x, y, x, y + h);
 	}
 }
 

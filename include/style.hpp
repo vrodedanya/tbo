@@ -13,17 +13,17 @@ namespace tbo
 			PIXELS = 0,
 			PERCENT = 2147483648 
 		};
+		enum BorderStyle
+		{
+			HIDDEN = 0,
+			SOLID = 1
+		};
 
 		struct Position
 		{
 			int x = 0;
 			int y = 0;
 		} position;
-		struct Size
-		{
-			int width  = 0;
-			int height = 0;
-		} size;
 		struct rgba
 		{
 		public:
@@ -42,9 +42,13 @@ namespace tbo
 			tbo::byte g;
 			tbo::byte b;
 			tbo::byte a;
-		} color;
-		static bool isPercent(int value);
-		static double get_fraction(int percent);
+		};
+
+		struct Size
+		{
+			int width  = 0;
+			int height = 0;
+		} size;
 		struct Margin
 		{
 			int absolute = 0;
@@ -53,6 +57,21 @@ namespace tbo
 			int right    = 0;
 			int left     = 0;
 		} margin;
+		
+		struct Background
+		{
+			rgba color;
+		} background;
+		
+		struct Border
+		{
+			BorderStyle style = tbo::style::HIDDEN;
+			rgba color;
+		} border;
+		
+
+		static bool isPercent(int value);
+		static double get_fraction(int percent);
 	};
 	int operator&(int num, const style::Measure& mes);
 	int operator|(int num, const style::Measure& mes);
