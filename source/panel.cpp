@@ -1,5 +1,6 @@
 #include "../include/panel.hpp"
 #include <iostream>
+#include "../include/drawing.hpp"
 
 void tbo::panel::draw(SDL_Renderer* renderer)
 {
@@ -21,10 +22,15 @@ void tbo::panel::draw(SDL_Renderer* renderer)
 	if (style.border.style != tbo::style::HIDDEN)
 	{
 		SDL_SetRenderDrawColor(renderer, style.border.color.r, style.border.color.g, style.border.color.b, style.border.color.a);
-		SDL_RenderDrawLine(renderer, x, y, x + w, y);
-		SDL_RenderDrawLine(renderer, x + w, y, x + w, y + h);
-		SDL_RenderDrawLine(renderer, x + w, y + h, x, y + h);
-		SDL_RenderDrawLine(renderer, x, y, x, y + h);
+//		SDL_RenderDrawLine(renderer, x, y, x + w, y);
+//		SDL_RenderDrawLine(renderer, x + w, y, x + w, y + h);
+//		SDL_RenderDrawLine(renderer, x + w, y + h, x, y + h);
+//		SDL_RenderDrawLine(renderer, x, y, x, y + h);
+		tbo::drawing::line(renderer, x, y, x + w, y, 5);
+		tbo::drawing::line(renderer, x + w, y, x + w, y + h, 5);
+		tbo::drawing::line(renderer, x + w, y + h, x, y + h, 5);
+		tbo::drawing::line(renderer, x, y, x, y + h, 5);
+
 	}
 }
 
