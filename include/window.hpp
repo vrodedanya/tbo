@@ -43,6 +43,7 @@ namespace tbo
 			style.size.width = width | tbo::style::PIXELS;
 			style.size.height = height | tbo::style::PIXELS;
 			body = new tbo::panel(style);
+			objects.emplace_back(body);
 		}	
 		window(const window& wind) = delete;
 		window(window&& w)

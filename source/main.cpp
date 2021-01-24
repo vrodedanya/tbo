@@ -75,6 +75,8 @@ int main()
 	main.position.x = 5 | tbo::style::PERCENT;
 	main.position.y = 5 | tbo::style::PERCENT;
 	main.background.color = tbo::style::rgba(255, 255, 255, 0);
+	main.border.style = tbo::style::SOLID;
+	main.border.width = 5;
 
 	tbo::style common;
 	common.size.width = 90 | tbo::style::PERCENT;
@@ -84,7 +86,7 @@ int main()
 	common.background.color = tbo::style::rgba(210, 210, 210, 0);
 	common.border.style = tbo::style::SOLID;
 	common.border.color = tbo::style::rgba(255, 100, 100, 0);
-	common.border.width = 5;
+	common.border.width = 5 | tbo::style::PERCENT;
 
 	prog.add_window("main", "title", 500, 500);
 
