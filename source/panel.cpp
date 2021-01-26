@@ -6,14 +6,19 @@ void tbo::panel::draw(SDL_Renderer* renderer)
 {
 	SDL_SetRenderDrawColor(renderer, style.background.color.r, style.background.color.g, style.background.color.b, style.background.color.a);
 
-	int x = get_pixel_xpos();
-	int y = get_pixel_ypos();
-	int w =	get_pixel_width();
-	int h = get_pixel_height();
+	int x = get_pixel_xpos(); // left xpos of panel
+	int y = get_pixel_ypos(); // top ypos of panel
+	int w =	get_pixel_width(); // panel's width
+	int h = get_pixel_height(); // panel's height
+	
+	int parent_end_x = parent->get_pixel_xpos() + parent->get_pixel_width(); // right xpos of panel
+	int parent_end_y = parent->get_pixel_ypos() + parent->get_pixel_height(); // bot ypos of panel;
+	int x2 = (x + w) > parent_end_x ? parent_end_x : (x + w);
+	int y2 = (y + h) > parent_end_y ? parent_end_y : (y + h);
 
-	for (int ypos = y; ypos < y + h ; ypos++)
+	for (int ypos = y ; ypos < y2 ; ypos++)
 	{
-		for (int xpos = x; xpos < x + w ; xpos++)
+		for (int xpos = x ; xpos < x2 ; xpos++)
 		{
 			SDL_RenderDrawPoint(renderer, xpos, ypos);
 		}
@@ -23,10 +28,10 @@ void tbo::panel::draw(SDL_Renderer* renderer)
 	{
 		SDL_SetRenderDrawColor(renderer, style.border.color.r, style.border.color.g, style.border.color.b, style.border.color.a);
 		int width = tbo::style::isPercent(style.border.width) ? tbo::style::get_fraction(style.border.width) * get_pixel_height() : style.border.width;
-		tbo::drawing::line(renderer, x,     y,     x + w, y,     width); // top
-		tbo::drawing::line(renderer, x + w, y,     x + w, y + h, width); // right
-		tbo::drawing::line(renderer, x + w, y + h, x,     y + h, width); // bot
-		tbo::drawing::line(renderer, x,     y,     x,     y + h, width); // left
+		tbo::drawing::line(renderer, x,  y,  x2, y,  width); // top
+		tbo::drawing::line(renderer, x2, y,  x2, y2, width); // right
+		tbo::drawing::line(renderer, x2, y2, x,  y2, width); // bot
+		tbo::drawing::line(renderer, x,  y,  x,  y2, width); // left
 	}
 }
 

@@ -6,6 +6,8 @@
 
 void tbo::window::update()
 {
+	SDL_SetRenderDrawColor(renderer, body->get_style().background.color.r, body->get_style().background.color.g, body->get_style().background.color.b, body->get_style().background.color.a);
+	SDL_RenderClear(renderer);
 	if (isShown)
 	{
 		for (auto& obj : objects)
