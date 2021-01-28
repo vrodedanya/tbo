@@ -37,7 +37,6 @@ namespace tbo
 		int loop();
 
 		void signal_handler();
-
 	};
 }
 
