@@ -10,7 +10,9 @@ namespace tbo
 	{
 	private:
 		tbo::style style;
+		tbo::style hover;
 		tbo::panel* parent = nullptr;
+		bool isHover = false;
 	public:
 		explicit panel(tbo::style _style) : style(_style)
 		{
@@ -24,6 +26,13 @@ namespace tbo
 		tbo::style& get_style(){return style;}
 		void set_parent(tbo::panel* _parent){this->parent = _parent;}
 		tbo::panel* get_parent(){return parent;}
+
+		void check_isHover(int xpos, int ypos);
+
+		void set_hover_style(tbo::style hover)
+		{
+			this->hover = hover;
+		}
 
 		int get_pixel_xpos();
 		int get_pixel_ypos();

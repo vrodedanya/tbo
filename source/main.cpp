@@ -67,7 +67,7 @@ int main()
 	test();
 
 	tbo::program prog;
-	tbo::logger::set_priority(tbo::logger::LOW_PRIORITY);
+	tbo::logger::set_priority(tbo::logger::HIGH_PRIORITY);
 
 	tbo::style main;
 	main.size.width = 90 | tbo::style::PERCENT;
@@ -88,15 +88,26 @@ int main()
 	common.border.color = tbo::style::rgba(255, 100, 100, 0);
 	common.border.width = 5 | tbo::style::PERCENT;
 
+	tbo::style hover = common;
+	hover.size.width = 100 | tbo::style::PERCENT;
+	hover.size.width = 100 | tbo::style::PERCENT;
+	hover.background.color = tbo::style::rgba(210, 210, 150, 0);
+	
+
 	prog.add_window("main", "title", 500, 500);
 
 	prog.get_window("main")->get_style().background.color = tbo::style::rgba(255, 0, 255, 0);
 
 	tbo::panel& panel1 = prog.get_window("main")->add_panel(main);
+	panel1.set_hover_style(main);
 	tbo::panel& panel2 = prog.get_window("main")->add_panel(common, &panel1);
+	panel2.set_hover_style(hover);
 	tbo::panel& panel3 = prog.get_window("main")->add_panel(common, &panel1);
+	panel3.set_hover_style(hover);
 	tbo::panel& panel4 = prog.get_window("main")->add_panel(common, &panel1);
+	panel4.set_hover_style(hover);
 	tbo::panel& panel5 = prog.get_window("main")->add_panel(common, &panel1);
+	panel5.set_hover_style(hover);
 
 	panel3.get_style().position.y = 20 | tbo::style::PERCENT;
 	panel4.get_style().position.y = 35 | tbo::style::PERCENT;

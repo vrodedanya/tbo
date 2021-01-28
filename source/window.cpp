@@ -15,11 +15,12 @@ void tbo::window::update()
 	{
 		for (auto& obj : objects)
 		{
+			if (obj->type == tbo::renderable::PANEL)
+			{
+				static_cast<tbo::panel*>(obj)->check_isHover(cursor.x, cursor.y);
+			}
 			obj->draw(renderer);
 		}
-
-		tbo::drawing::changeColor(renderer, 255, 0, 0, 0);
-		tbo::drawing::circle(renderer, cursor.x, cursor.y, 25);
 
 		tbo::drawing::updateRenderer(renderer);
 	}
