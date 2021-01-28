@@ -2,7 +2,6 @@
 #define PANEL_HPP
 
 #include "renderable.hpp"
-#include <SDL2/SDL.h>
 #include "style.hpp"
 
 namespace tbo

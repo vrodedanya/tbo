@@ -3,11 +3,12 @@
 #include <stdexcept>
 #include "../include/signal_manager.hpp"
 #include "../include/logger.hpp"
+#include "../include/drawing.hpp"
 
 void tbo::window::update()
 {
-	SDL_SetRenderDrawColor(renderer, body->get_style().background.color.r, body->get_style().background.color.g, body->get_style().background.color.b, body->get_style().background.color.a);
-	SDL_RenderClear(renderer);
+	tbo::drawing::changeColor(renderer, body->get_style().background.color.r, body->get_style().background.color.g, body->get_style().background.color.b, body->get_style().background.color.a);
+	tbo::drawing::fillScreen(renderer);
 	if (isShown)
 	{
 		for (auto& obj : objects)
@@ -15,7 +16,7 @@ void tbo::window::update()
 			obj->draw(renderer);
 		}
 
-		SDL_RenderPresent(renderer);
+		tbo::drawing::updateRenderer(renderer);
 	}
 }
 

@@ -1,7 +1,7 @@
 #ifndef RENDERABLE_HPP
 #define RENDERABLE_HPP
 
-#include <SDL2/SDL.h>
+#include "drawing.hpp"
 
 namespace tbo
 {
@@ -16,7 +16,7 @@ namespace tbo
 
 		Type type;
 		virtual ~renderable(){}
-		virtual void draw(SDL_Renderer* renderer) = 0;
+		virtual void draw(tbo::renderer* renderer) = 0;
 	};
 }
 #endif

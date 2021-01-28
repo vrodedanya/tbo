@@ -2,10 +2,10 @@
 #define STYLE_HPP
 
 #include <string>
+#include "types.hpp"
 
 namespace tbo
 {
-	using byte = unsigned char;
 	struct style
 	{
 		enum Measure
