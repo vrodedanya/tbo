@@ -67,7 +67,7 @@ int main()
 	test();
 
 	tbo::program prog;
-	tbo::logger::set_priority(tbo::logger::MEDIUM_PRIORITY);
+	tbo::logger::set_priority(tbo::logger::LOW_PRIORITY);
 
 	tbo::style main;
 	main.size.width = 90 | tbo::style::PERCENT;

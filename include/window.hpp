@@ -68,6 +68,8 @@ namespace tbo
 
 		void update(); // render all objects
 
+		void signal_handler();
+
 		std::vector<tbo::renderable*>& get_objects(){return objects;}
 
 		void add_object(tbo::renderable* obj);
