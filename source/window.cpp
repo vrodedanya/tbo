@@ -18,6 +18,9 @@ void tbo::window::update()
 			obj->draw(renderer);
 		}
 
+		tbo::drawing::changeColor(renderer, 255, 0, 0, 0);
+		tbo::drawing::circle(renderer, cursor.x, cursor.y, 25);
+
 		tbo::drawing::updateRenderer(renderer);
 	}
 }
@@ -98,6 +101,11 @@ void tbo::window::signal_handler()
 		{
 			body->get_style().size.width = std::stoi(command[1]);
 			body->get_style().size.height = std::stoi(command[2]);
+		}
+		else if (command[0] == "mouse")
+		{
+			cursor.x = std::stoi(command[1]);
+			cursor.y = std::stoi(command[2]);
 		}
 		else
 		{

@@ -18,6 +18,12 @@ namespace tbo
 		bool isShown = true;
 		bool isMouseIn = false;
 
+		struct Cursor
+		{
+			int x = 0;
+			int y = 0;
+		}cursor;
+
 		tbo::panel* body = nullptr;
 	public:
 		explicit window(const char* title, int width = 100, int height = 100, int xpos = SDL_WINDOWPOS_CENTERED, int ypos = SDL_WINDOWPOS_CENTERED, Uint32 window_flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, Uint32 renderer_flags = SDL_RENDERER_ACCELERATED)

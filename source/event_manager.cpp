@@ -71,6 +71,11 @@ void tbo::event_manager::update()
 						tbo::logger::log("event manager", tbo::logger::MEDIUM_PRIORITY, "caught unexpected window event");
 				}
 				break;
+			case SDL_MOUSEMOTION:
+				tbo::logger::log("event manager", tbo::logger::LOW_PRIORITY, "caught mouse motion event");
+				tbo::signal_manager::add_signal(tbo::signal(receiver, "mouse " + std::to_string(event.motion.x) + " " + std::to_string(event.motion.y)));
+				break;
 		}
+
 	}
 }
