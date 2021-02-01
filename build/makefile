@@ -9,15 +9,15 @@
 #---------------------------------------#
 
 # Program name (ex: test, program)
-NAME := window
+NAME :=	window
 # Compiler name (ex: gcc, g++, clang)
 CC := g++
 # File extension (ex: .cpp, .c)
 LANG := .cpp
 # Compiler flags (ex: -Wall, -O2, -g)
 CFLAGS := -Wall -O0 -g -std=c++17
-# Linker flags (ex: -g )
-LDFLAGS := -g
+# Linker flags (ex: -pthread)
+LDFLAGS :=
 # Libs (ex: -lm, -lncurses, -lSDL2)
 LIBS := -lSDL2
 # Defines (ex: -D DEBUG, -Dcount=5)
@@ -55,22 +55,23 @@ SEPARATOR_C := $(DARKGRAY)
 
 #---------------------------------------#
 
-SRC:=$(DIR)
+# For this function thanks LightStruk from this stackoverflow question
+# https://stackoverflow.com/questions/4036191/sources-from-subdirectories-in-makefile
+rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
+
+SRC := $(DIR)
 
 # Comment this string if you don't use special directory for building project
-SRC:=$(addprefix ../, $(DIR))
-
-# Storage template and path to the source files
-SEARCH_FILE:=$(addsuffix /*$(LANG), $(SRC))
+SRC := $(addprefix ../, $(DIR))
 
 # Storages all source files with path
-FILES:=$(wildcard $(SEARCH_FILE))
+FILES := $(call rwildcard,$(SRC),*$(LANG))
 
 # Storages all object files
-OBJ_FILES:=$(notdir $(patsubst %$(LANG), %.o, $(FILES)))
+OBJ_FILES := $(notdir $(patsubst %$(LANG), %.o, $(FILES)))
 
 # Added directories from $(SRC) to directories which contain source code
-VPATH:=$(SRC)
+VPATH := $(SRC) $(dir $(FILES))
 
 all: $(OBJ_FILES) 
 	@$(CC) $^ $(LIBS) $(LDFLAGS) -o $(NAME)

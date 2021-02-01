@@ -6,10 +6,54 @@
 #include "../include/drawing.hpp"
 #include "../include/parser.hpp"
 
+tbo::window::window(const char* title, int width, int height, int xpos, int ypos, Uint32 window_flags, Uint32 renderer_flags)
+{
+	if (SDL_WasInit(SDL_INIT_VIDEO) == 0) 
+	{
+		if (SDL_Init(SDL_INIT_VIDEO) != 0) throw std::runtime_error("Video initializing error");
+		tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "SDL2 was initialized");
+	}
+	if ((wind = SDL_CreateWindow(title, xpos, ypos, width, height, window_flags)) == NULL)
+	{
+		throw std::runtime_error("Creating window error");
+	}
+	tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "new window was created with id", SDL_GetWindowID(wind));
+
+	if ((renderer = SDL_CreateRenderer(wind, -1, renderer_flags)) == NULL)
+	{
+		throw std::runtime_error("Creating renderer error");
+	}
+	tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "window's renderer was created");
+
+	tbo::style style;
+	style.size.width = width | tbo::style::PIXELS;
+	style.size.height = height | tbo::style::PIXELS;
+	body = new tbo::panel(style);
+}	
+tbo::window::window(window&& w)
+{
+	this->body = w.body;
+	this->wind = w.wind;
+	this->renderer = w.renderer;
+	w.body = nullptr;
+	w.wind = nullptr;
+	w.renderer = nullptr;
+	tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "called move constructor");
+}
+tbo::window::~window()
+{
+	delete body;
+	if (renderer != nullptr) SDL_DestroyRenderer(renderer);
+	if (wind != nullptr) SDL_DestroyWindow(wind);
+	tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "called destructor");
+}
+
+
 void tbo::window::update()
 {
 	signal_handler();
-	tbo::drawing::changeColor(renderer, body->get_style().background.color.r, body->get_style().background.color.g, body->get_style().background.color.b, body->get_style().background.color.a);
+	const tbo::style& back = body->get_style();
+	tbo::drawing::changeColor(renderer, back.background.color.r, back.background.color.g, back.background.color.b, back.background.color.a);
 	tbo::drawing::fillScreen(renderer);
 	if (isShown)
 	{
