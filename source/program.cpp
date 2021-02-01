@@ -5,6 +5,15 @@
 #include "../include/logger.hpp"
 #include "../include/parser.hpp"
 
+tbo::program::~program()
+{
+	delete emanager;
+	for (auto& window : windows)
+	{
+		delete window;
+	}
+	tbo::logger::log("program", tbo::logger::MEDIUM_PRIORITY, "was called destructor");
+}
 
 int tbo::program::loop()
 {
