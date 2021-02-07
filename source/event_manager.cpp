@@ -75,6 +75,14 @@ void tbo::event_manager::update()
 				tbo::logger::log("event manager", tbo::logger::LOW_PRIORITY, "caught mouse motion event");
 				tbo::signal_manager::add_signal(tbo::signal(receiver, "mouse " + std::to_string(event.motion.x) + " " + std::to_string(event.motion.y)));
 				break;
+			case SDL_MOUSEBUTTONDOWN:
+				tbo::logger::log("event manager", tbo::logger::LOW_PRIORITY, "caught mouse button down event");
+				tbo::signal_manager::add_signal(tbo::signal(receiver, "buttondown"));
+				break;
+			case SDL_MOUSEBUTTONUP:
+				tbo::logger::log("event manager", tbo::logger::LOW_PRIORITY, "caught mouse button up event");
+				tbo::signal_manager::add_signal(tbo::signal(receiver, "buttonup"));
+				break;
 		}
 
 	}

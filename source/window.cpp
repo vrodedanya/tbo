@@ -48,21 +48,17 @@ tbo::window::~window()
 	tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "called destructor");
 }
 
-
 void tbo::window::update()
 {
 	signal_handler();
 	const tbo::style& back = body->get_style();
 	tbo::drawing::changeColor(renderer, back.background.color.r, back.background.color.g, back.background.color.b, back.background.color.a);
 	tbo::drawing::fillScreen(renderer);
+
 	if (isShown)
 	{
 		for (auto& obj : objects)
 		{
-			if (obj->type == tbo::renderable::PANEL)
-			{
-				static_cast<tbo::panel*>(obj)->check_isHover(cursor.x, cursor.y);
-			}
 			obj->draw(renderer);
 		}
 

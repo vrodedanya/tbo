@@ -4,16 +4,7 @@
 
 void tbo::panel::draw(SDL_Renderer* renderer)
 {
-	tbo::style buf;
-	if (isHover)
-	{
-		buf = hover;
-	}
-	else
-	{
-		buf = style;
-	}
-	SDL_SetRenderDrawColor(renderer, buf.background.color.r, buf.background.color.g, buf.background.color.b, buf.background.color.a);
+	SDL_SetRenderDrawColor(renderer, style.background.color.r, style.background.color.g, style.background.color.b, style.background.color.a);
 
 	int x = get_pixel_xpos(); // left xpos of panel
 	int y = get_pixel_ypos(); // top ypos of panel
@@ -33,31 +24,14 @@ void tbo::panel::draw(SDL_Renderer* renderer)
 		}
 	}
 
-	if (buf.border.style != tbo::style::HIDDEN)
+	if (style.border.style != tbo::style::HIDDEN)
 	{
-		tbo::drawing::changeColor(renderer, buf.border.color.r, buf.border.color.g, buf.border.color.b, buf.border.color.a);
-		int width = tbo::style::isPercent(buf.border.width) ? tbo::style::get_fraction(buf.border.width) * get_pixel_height() : buf.border.width;
+		tbo::drawing::changeColor(renderer, style.border.color.r, style.border.color.g, style.border.color.b, style.border.color.a);
+		int width = tbo::style::isPercent(style.border.width) ? tbo::style::get_fraction(style.border.width) * get_pixel_height() : style.border.width;
 		tbo::drawing::line(renderer, x,  y,  x2, y,  width); // top
 		tbo::drawing::line(renderer, x2, y,  x2, y2, width); // right
 		tbo::drawing::line(renderer, x2, y2, x,  y2, width); // bot
 		tbo::drawing::line(renderer, x,  y,  x,  y2, width); // left
-	}
-}
-
-void tbo::panel::check_isHover(int xpos, int ypos)
-{
-	int x = get_pixel_xpos(); // left xpos of panel
-	int y = get_pixel_ypos(); // top ypos of panel
-	int w =	get_pixel_width(); // panel's width
-	int h = get_pixel_height(); // panel's height
-
-	if (xpos >= x and xpos <= x + w and ypos >= y and ypos <= y + h)
-	{
-		isHover = true;
-	}
-	else
-	{
-		isHover = false;
 	}
 }
 
