@@ -35,6 +35,8 @@ namespace tbo
 // Methods that are called in the loop
 		int loop();
 
+		virtual void update(){}; // this method called in loop function and created for implement user requests
+
 		void signal_handler();
 	};
 }

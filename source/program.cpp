@@ -23,6 +23,7 @@ int tbo::program::loop()
 		{
 			emanager->update();
 			signal_handler();
+			update();
 			for (auto& window : windows)
 			{
 				window->update();
