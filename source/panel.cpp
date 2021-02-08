@@ -16,13 +16,12 @@ void tbo::panel::draw(SDL_Renderer* renderer)
 	int x2 = (x + w) > parent_end_x ? parent_end_x : (x + w);
 	int y2 = (y + h) > parent_end_y ? parent_end_y : (y + h);
 
-	for (int ypos = y ; ypos < y2 ; ypos++)
-	{
-		for (int xpos = x ; xpos < x2 ; xpos++)
-		{
-			SDL_RenderDrawPoint(renderer, xpos, ypos);
-		}
-	}
+	SDL_Rect rect;
+	rect.x = x;
+	rect.y = y;
+	rect.w = (x + w) > parent_end_x ? parent_end_x - x : w;
+	rect.h = (y + h) > parent_end_y ? parent_end_y - y : h;
+	SDL_RenderFillRect(renderer, &rect);
 
 	if (style.border.style != tbo::style::HIDDEN)
 	{
