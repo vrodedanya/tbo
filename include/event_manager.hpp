@@ -9,6 +9,7 @@ namespace tbo
 	{
 	private:
 		SDL_Event event;
+		bool isWorking();
 	public:
 		void update();
 	};

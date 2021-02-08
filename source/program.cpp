@@ -4,6 +4,8 @@
 #include "../include/signal_manager.hpp"
 #include "../include/logger.hpp"
 #include "../include/parser.hpp"
+#include "../include/time.hpp"
+#include <thread>
 
 tbo::program::~program()
 {
@@ -17,11 +19,12 @@ tbo::program::~program()
 
 int tbo::program::loop()
 {
+	std::thread eventmanager(&tbo::event_manager::update, emanager);
 	while (!windows.empty())
 	{
+		tbo::time::timerange::begin();
 		try
 		{
-			emanager->update();
 			signal_handler();
 			update();
 			for (auto& window : windows)
@@ -34,7 +37,11 @@ int tbo::program::loop()
 			tbo::logger::log("program", tbo::logger::HIGH_PRIORITY, except.what());
 			return EXIT_FAILURE;
 		}
+		tbo::time::timerange::end();
+		tbo::logger::log("program", tbo::logger::LOW_PRIORITY, "loop ended with", 1 / tbo::time::timerange::get_delta(), "fps");
 	}
+	tbo::signal_manager::add_signal(tbo::signal("eventmanager", "shutdown"));
+	eventmanager.join();
 	return EXIT_SUCCESS;
 }
 
