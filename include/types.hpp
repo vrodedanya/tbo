@@ -4,6 +4,7 @@
 namespace tbo
 {
 	using byte = unsigned char;
+	using word = unsigned short int;
 }
 
 #endif
