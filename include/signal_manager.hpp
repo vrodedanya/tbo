@@ -3,10 +3,7 @@
 
 #include <vector>
 #include <string>
-
-#ifdef DEBUG
-	#include <iostream>
-#endif
+#include <mutex>
 
 namespace tbo
 {
@@ -35,6 +32,7 @@ namespace tbo
 	{
 	private:
 		static std::vector<tbo::signal> signals;
+		static std::mutex locker;
 	public:
 		signal_manager() = delete;
 		signal_manager(const signal_manager&) = delete;
