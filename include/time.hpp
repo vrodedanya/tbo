@@ -2,6 +2,7 @@
 #define TIME_HPP
 
 #include <chrono>
+#include <stack>
 
 namespace tbo
 {
@@ -14,7 +15,7 @@ namespace tbo
 		{
 		private:
 			static double delta;
-			static std::chrono::system_clock::time_point beg;
+			static std::stack<std::chrono::system_clock::time_point> sessions;
 		public:
 			static void begin();
 			static void end();
