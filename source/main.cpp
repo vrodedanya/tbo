@@ -1,8 +1,7 @@
-#include "../include/program.hpp"
-#include "../include/panel.hpp"
-#include "../include/style.hpp"
-#include "../include/test.hpp"
-#include <functional>
+#include "program.hpp"
+#include "panel.hpp"
+#include "style.hpp"
+#include "test.hpp"
 
 void test()
 {
@@ -67,7 +66,7 @@ int main()
 	test();
 
 	tbo::program prog;
-	tbo::logger::set_priority(tbo::logger::LOW_PRIORITY);
+	tbo::logger::set_priority(tbo::logger::MEDIUM_PRIORITY);
 
 	tbo::style main;
 	main.size.width = 90 | tbo::style::PERCENT;

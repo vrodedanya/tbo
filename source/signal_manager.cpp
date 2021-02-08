@@ -1,4 +1,4 @@
-#include "../include/signal_manager.hpp"
+#include "signal_manager.hpp"
 #include <algorithm>
 #include <mutex>
 #include <ostream>

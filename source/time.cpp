@@ -1,4 +1,4 @@
-#include "../include/time.hpp"
+#include "time.hpp"
 #include <stdexcept>
 
 std::stack<std::chrono::system_clock::time_point> tbo::time::timerange::sessions;

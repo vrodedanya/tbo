@@ -1,6 +1,6 @@
-#include "../include/panel.hpp"
+#include "panel.hpp"
 #include <iostream>
-#include "../include/drawing.hpp"
+#include "drawing.hpp"
 
 void tbo::panel::draw(SDL_Renderer* renderer)
 {

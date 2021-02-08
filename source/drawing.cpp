@@ -1,4 +1,4 @@
-#include "../include/drawing.hpp"
+#include "drawing.hpp"
 #include <cmath>
 #include <iostream>
 

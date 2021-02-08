@@ -1,4 +1,4 @@
-#include "../include/style.hpp"
+#include "style.hpp"
 
 int tbo::operator&(int num, const style::Measure& mes)
 {

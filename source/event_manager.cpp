@@ -1,10 +1,10 @@
-#include "../include/event_manager.hpp"
-#include "../include/signal_manager.hpp"
-#include "../include/logger.hpp"
+#include "event_manager.hpp"
+#include "signal_manager.hpp"
+#include "logger.hpp"
 #include <string>
 
 bool tbo::event_manager::isWorking()
-{
+{	
 	tbo::signal sig;
 	if ((sig = tbo::signal_manager::get_signal("eventmanager")) != tbo::signal("",""))
 	{

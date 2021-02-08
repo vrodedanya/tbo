@@ -1,10 +1,10 @@
-#include "../include/program.hpp"
+#include "program.hpp"
 #include <algorithm>
 #include <stdexcept>
-#include "../include/signal_manager.hpp"
-#include "../include/logger.hpp"
-#include "../include/parser.hpp"
-#include "../include/time.hpp"
+#include "signal_manager.hpp"
+#include "logger.hpp"
+#include "parser.hpp"
+#include "time.hpp"
 #include <thread>
 
 tbo::program::~program()

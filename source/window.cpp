@@ -1,10 +1,10 @@
-#include "../include/window.hpp"
+#include "window.hpp"
 #include <algorithm>
 #include <stdexcept>
-#include "../include/signal_manager.hpp"
-#include "../include/logger.hpp"
-#include "../include/drawing.hpp"
-#include "../include/parser.hpp"
+#include "signal_manager.hpp"
+#include "logger.hpp"
+#include "drawing.hpp"
+#include "parser.hpp"
 
 tbo::window::window(const char* title, int width, int height, int xpos, int ypos, Uint32 window_flags, Uint32 renderer_flags)
 {

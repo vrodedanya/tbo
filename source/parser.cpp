@@ -1,4 +1,4 @@
-#include "../include/parser.hpp"
+#include "parser.hpp"
 
 std::vector<std::string> tbo::parser::split(const std::string& str, char separator)
 {
