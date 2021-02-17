@@ -57,7 +57,7 @@ tbo::window* tbo::program::get_window(const char* window_name)
 {
 	if (windows_map.find(window_name) == windows_map.end())
 	{
-		throw std::runtime_error("This window doesn't exist!");
+		return nullptr;
 	}
 	return windows_map[window_name];
 }
