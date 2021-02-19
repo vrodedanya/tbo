@@ -29,6 +29,7 @@ tbo::window::window(const char* title, int width, int height, int xpos, int ypos
 	style.size.width = width | tbo::style::PIXELS;
 	style.size.height = height | tbo::style::PIXELS;
 	body = new tbo::panel(style);
+	tbo::signal_manager::subscribe("window " + std::to_string(SDL_GetWindowID(wind)), this);
 }	
 tbo::window::window(window&& w)
 {
@@ -51,7 +52,6 @@ tbo::window::~window()
 
 void tbo::window::update()
 {
-	signal_handler();
 	const tbo::style& back = body->get_style();
 	tbo::drawing::changeColor(renderer, back.background.color.r, back.background.color.g, back.background.color.b, back.background.color.a);
 	tbo::drawing::fillScreen(renderer);
@@ -109,44 +109,37 @@ void tbo::window::remove_object(tbo::renderable * obj)
 	tbo::logger::log("window", tbo::logger::MEDIUM_PRIORITY, "object was removed from render");
 }
 
-void tbo::window::signal_handler()
+void tbo::window::signal_handler(std::string command)
 {
-	tbo::signal sig;
-	std::string receiver = "window " + std::to_string(SDL_GetWindowID(wind));
-	while((sig = tbo::signal_manager::get_signal(receiver)) != tbo::signal("",""))
-	{
-		tbo::logger::log("window", tbo::logger::LOW_PRIORITY, "receiving signal (", sig, ")");		
+		std::vector<std::string> arguments = tbo::parser::split(command, ' ');
 
-		std::vector<std::string> command = tbo::parser::split(sig.command, ' ');
-
-		if (command[0] == "show")
+		if (arguments[0] == "show")
 		{
 			isShown = true;
 		}
-		else if (command[0] == "hide")
+		else if (arguments[0] == "hide")
 		{
 			isShown = false;
 		}
-		else if (command[0] == "enter")
+		else if (arguments[0] == "enter")
 		{
 			isMouseIn = true;
 		}
-		else if (command[0] == "leave")
+		else if (arguments[0] == "leave")
 		{
 			isMouseIn = false;
 		}
-		else if (command[0] == "move")
+		else if (arguments[0] == "move")
 		{
 		}
-		else if (command[0] == "resize")
+		else if (arguments[0] == "resize")
 		{
-			body->get_style().size.width = std::stoi(command[1]);
-			body->get_style().size.height = std::stoi(command[2]);
+			body->get_style().size.width = std::stoi(arguments[1]);
+			body->get_style().size.height = std::stoi(arguments[2]);
 		}
 		else
 		{
-			throw std::runtime_error("Unexpected command: " + command[0]);
+			throw std::runtime_error("Unexpected arguments: " + arguments[0]);
 		}
-	}
 }
 

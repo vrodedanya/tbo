@@ -3,13 +3,14 @@
 
 #include <SDL2/SDL.h>
 #include <vector>
-#include "../include/renderable.hpp"
-#include "../include/panel.hpp"
+#include "renderable.hpp"
+#include "panel.hpp"
 #include "logger.hpp"
+#include "subscriber.hpp"
 
 namespace tbo
 {
-	class window
+	class window : public subscriber
 	{
 	private:
 		SDL_Window* wind;
@@ -19,6 +20,7 @@ namespace tbo
 		bool isMouseIn = false;
 
 		tbo::panel* body = nullptr;
+		void signal_handler(std::string command);
 	public:
 		explicit window(const char* title, int width = 100, int height = 100, int xpos = SDL_WINDOWPOS_CENTERED, int ypos = SDL_WINDOWPOS_CENTERED, Uint32 window_flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, Uint32 renderer_flags = SDL_RENDERER_ACCELERATED);
 
@@ -29,8 +31,6 @@ namespace tbo
 		~window();
 
 		void update(); // render all objects
-
-		void signal_handler();
 
 		void add_object(tbo::renderable* obj);
 		tbo::panel& add_panel(tbo::style style);
@@ -49,7 +49,6 @@ namespace tbo
 		bool get_isMouseIn(){return isMouseIn;}
 
 		tbo::style& get_style(){return body->get_style();}
-
 	};
 }
 

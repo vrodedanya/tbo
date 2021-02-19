@@ -19,13 +19,12 @@ tbo::program::~program()
 
 int tbo::program::loop()
 {
-	std::thread eventmanager(&tbo::event_manager::update, emanager);
 	while (!windows.empty())
 	{
 		tbo::time::timerange::begin();
 		try
 		{
-			signal_handler();
+			emanager->update();
 			update();
 			for (auto& window : windows)
 			{
@@ -40,8 +39,6 @@ int tbo::program::loop()
 		tbo::time::timerange::end();
 		tbo::logger::log("program", tbo::logger::LOW_PRIORITY, "loop ended with", 1 / tbo::time::timerange::get_delta(), "fps");
 	}
-	tbo::signal_manager::add_signal(tbo::signal("eventmanager", "shutdown"));
-	eventmanager.join();
 	return EXIT_SUCCESS;
 }
 
@@ -62,33 +59,27 @@ tbo::window* tbo::program::get_window(const char* window_name)
 	return windows_map[window_name];
 }
 
-void tbo::program::signal_handler()
+void tbo::program::signal_handler(std::string command)
 {
-	tbo::signal sig;
-	while((sig = tbo::signal_manager::get_signal("program")) != tbo::signal("",""))
+	std::vector<std::string> arguments = tbo::parser::split(command, ' ');
+	
+	if (arguments[0] == "destroy")
 	{
-		tbo::logger::log("program", tbo::logger::LOW_PRIORITY, "receiving signal (", sig, ")");		
-		std::vector<std::string> command = tbo::parser::split(sig.command, ' ');
-		
-		if (command[0] == "destroy")
+		Uint32 id = std::stoi(arguments[1]);
+		auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
+		if (it != windows.end())
 		{
-			Uint32 id = std::stoi(command[1]);
-			auto it = std::find_if (windows.begin(), windows.end(), [id](tbo::window* w){return SDL_GetWindowID(w->get_window()) == id;});
-			if (it != windows.end())
+			delete *it;
+			windows.erase(it);
+			for (auto map_it = windows_map.begin() ; map_it != windows_map.end() ; map_it++)
 			{
-				delete *it;
-				windows.erase(it);
-				for (auto map_it = windows_map.begin() ; map_it != windows_map.end() ; map_it++)
+				if (map_it->second == *it) 
 				{
-					if (map_it->second == *it) 
-					{
-						windows_map.erase(map_it);
-						break;
-					}
+					windows_map.erase(map_it);
+					break;
 				}
-				tbo::logger::log("program", tbo::logger::MEDIUM_PRIORITY, "window with id", id, "was destroyed");
 			}
+			tbo::logger::log("program", tbo::logger::MEDIUM_PRIORITY, "window with id", id, "was destroyed");
 		}
-
 	}
 }
