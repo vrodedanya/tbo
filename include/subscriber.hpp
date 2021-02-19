@@ -10,6 +10,7 @@ namespace tbo
 	private:
 
 	public:
+		virtual ~subscriber(){}
 		virtual void signal_handler(tbo::signal){}
 	};
 }
