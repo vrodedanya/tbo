@@ -1,6 +1,7 @@
 #ifndef SUBSCRIBET_HPP
 #define SUBSCRIBET_HPP
 
+#include <string>
 #include "signal.hpp"
 
 namespace tbo
@@ -11,7 +12,7 @@ namespace tbo
 
 	public:
 		virtual ~subscriber(){}
-		virtual void signal_handler(tbo::signal){}
+		virtual void signal_handler(std::string){}
 	};
 }
 
