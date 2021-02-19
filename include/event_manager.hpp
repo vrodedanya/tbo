@@ -2,15 +2,18 @@
 #define EVENT_MANAGER_HPP
 
 #include <SDL2/SDL_events.h>
+#include "subscriber.hpp"
 
 namespace tbo
 {
-	class event_manager
+	class event_manager : public subscriber
 	{
 	private:
 		SDL_Event event;
+		void signal_handler(std::string command);
 		bool isWorking();
 	public:
+		event_manager();
 		void update();
 	};
 }

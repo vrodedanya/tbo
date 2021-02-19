@@ -7,17 +7,23 @@
 #include <vector>
 #include "event_manager.hpp"
 #include "logger.hpp"
+#include "subscriber.hpp"
+#include "signal_manager.hpp"
 
 namespace tbo
 {
-	class program
+	class program : public subscriber
 	{
 	private:
 		std::map<std::string, tbo::window*> windows_map; // contains pair 'name' and window. Required to work with a window by name
 		std::vector<tbo::window*> windows; // contains all windows. Used for update objects
 		tbo::event_manager* emanager; // handle program events
+		void signal_handler(std::string command);
 	public:
-		explicit program() : emanager(new tbo::event_manager()){}
+		explicit program() : emanager(new tbo::event_manager())
+		{
+			tbo::signal_manager::subscribe("program", this);
+		}
 		~program();
 
 // Deleted methods
@@ -37,7 +43,6 @@ namespace tbo
 
 		virtual void update(){}; // this method called in loop function and created for implement user requests
 
-		void signal_handler();
 	};
 }
 
