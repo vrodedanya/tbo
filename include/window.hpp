@@ -1,7 +1,6 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
-#include <SDL2/SDL.h>
 #include <vector>
 #include "renderable.hpp"
 #include "panel.hpp"

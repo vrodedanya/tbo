@@ -1,7 +1,7 @@
 #ifndef DRAWING_HPP
 #define DRAWING_HPP
 
-#include <SDL2/SDL.h>
+#include "SDL.h"
 #include "types.hpp"
 
 namespace tbo

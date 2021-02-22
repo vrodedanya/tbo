@@ -1,7 +1,7 @@
 #ifndef EVENT_MANAGER_HPP
 #define EVENT_MANAGER_HPP
 
-#include <SDL2/SDL_events.h>
+#include "SDL_events.h"
 #include "subscriber.hpp"
 
 namespace tbo
