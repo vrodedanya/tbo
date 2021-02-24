@@ -1,0 +1,55 @@
+#!/usr/bin/bash
+
+# Colors
+BLACK='\033[0;30m'
+DARKGRAY='\033[1;30m'
+RED='\033[0;31m'
+LIGHTRED='\033[1;31m'
+GREEN='\033[0;32m'
+LIGHTGREEN='\033[1;32m'
+BROWN='\033[0;33m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+LIGHTBLUE='\033[1;34m'
+PURPLE='\033[0;35m'
+LIGHTPURPLE='\033[1;35m'
+CYAN='\033[0;36m'
+LIGHTCYAN='\033[1;36m'
+LIGHTGRAY='\033[0;37m'
+WHITE='\033[1;37m'
+NC='\033[0m'
+
+echo -e "${CYAN}=================${NC}"
+echo -e "${CYAN}TBO CONFIGURATION${NC}"
+echo -e "${CYAN}=================${NC}"
+echo -e "${LIGHTBLUE}Initing git submodules${NC}"
+git init > /dev/null
+git submodule update > /dev/null
+cd SDL
+
+echo -e "${LIGHTBLUE}SDL configuration begins...${NC}"
+echo -e "${LIGHTBLUE}Please wait. This may take a few seconds${NC}"
+
+if ./configure > /dev/null ;
+then
+	echo -e "${LIGHTGREEN}SDL configuration completed successfully${NC}"
+else
+	echo -e "${LIGHTRED}SDL configuration error! Pls leave a message about the problem in https://github.com/vrodedanya/tbo${NC}"
+	exit 1
+
+fi
+
+echo -e "${LIGHTBLUE}SDL build begins...${NC}"
+echo -e "${LIGHTBLUE}Please wait. This may take a few seconds${NC}"
+if make > /dev/null ;
+then
+	echo -e "${LIGHTGREEN}SDL building complete${NC}"
+else
+	echo -e "${LIGHTRED}SDL building error! Pls leave a message about the problem in https://github.com/vrodedanya/tbo${NC}"
+	exit 1
+fi
+
+echo -e "${LIGHTBLUE}The SDL repository was initialized${NC}"
+echo -e "${LIGHTBLUE}Now you can add include directory to your compiler's flags${NC}"
+echo -e "${LIGHTBLUE}and build directory to linker for sdl library${NC}"
+
