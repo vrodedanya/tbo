@@ -36,7 +36,7 @@ int tbo::program::loop()
 			tbo::logger::log("program", tbo::logger::HIGH_PRIORITY, except.what());
 			return EXIT_FAILURE;
 		}
-		tbo::time::range::end();
+		tbo::time::range::deltaEnd();
 		tbo::logger::log("program", tbo::logger::LOW_PRIORITY, "loop ended with", 1 / tbo::time::range::get_delta(), "fps");
 	}
 	return EXIT_SUCCESS;

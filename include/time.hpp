@@ -18,7 +18,8 @@ namespace tbo
 			static std::stack<std::chrono::system_clock::time_point> sessions;
 		public:
 			static void begin();
-			static void end();
+			static double end();
+			static void deltaEnd();
 			static double get_delta(){return delta;}
 		};
 	};
