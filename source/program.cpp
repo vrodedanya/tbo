@@ -21,7 +21,7 @@ int tbo::program::loop()
 {
 	while (!windows.empty())
 	{
-		tbo::time::timerange::begin();
+		tbo::time::range::begin();
 		try
 		{
 			emanager->update();
@@ -36,8 +36,8 @@ int tbo::program::loop()
 			tbo::logger::log("program", tbo::logger::HIGH_PRIORITY, except.what());
 			return EXIT_FAILURE;
 		}
-		tbo::time::timerange::end();
-		tbo::logger::log("program", tbo::logger::LOW_PRIORITY, "loop ended with", 1 / tbo::time::timerange::get_delta(), "fps");
+		tbo::time::range::end();
+		tbo::logger::log("program", tbo::logger::LOW_PRIORITY, "loop ended with", 1 / tbo::time::range::get_delta(), "fps");
 	}
 	return EXIT_SUCCESS;
 }

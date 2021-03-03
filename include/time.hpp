@@ -11,7 +11,7 @@ namespace tbo
 	private:
 		
 	public:
-		class timerange
+		class range
 		{
 		private:
 			static double delta;
